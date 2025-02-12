@@ -9,8 +9,8 @@
   }
 </style>
 <div class="fixed-top">
-  <div class="container">
-    <a class="bg-dark" href="/"><h1>LOGO</h1></a>
+  <div class="container d-flex" style='width: 100%;justify-content: center;'>
+    <a class="my-2" href="/"><h1>LOGO</h1></a>
   </div>
 
   <nav class="bg-body-tertiary container">
@@ -19,7 +19,7 @@
       <div class="d-flex" id="navbarText">
         <ul class="d-flex m-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Features</a>
@@ -36,8 +36,14 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <li class="nav-item" style="display: flex;">
+            <div class="container" style="display: flex; align-items: center;">
+              {% if request.user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="text-danger">(Logout)</a>
+              {% else %}
+                <a href="{% url 'login' %}">(Login)</a>
+              {% endif %}
+            </div>
           </li>
         </ul>
       </div>
@@ -51,9 +57,10 @@
   <div class="container">
     {% if request.user.is_authenticated %}
       <p>Hello {{ request.user }}</p>
-      <a href="{% url 'logout' %}">Logout</a>
+      <!--a href="{% url 'logout' %}">Logout</a-->
     {% else %}
-      <a href="{% url 'login' %}">Login</a>
+      <p>Hello Guest User</p>
+      <!--a href="{% url 'login' %}">Login</a-->
     {% endif %}
   </div>
 
