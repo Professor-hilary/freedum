@@ -1,27 +1,62 @@
-{% extends "main.html" %}
-
-{% block content %}
+{% extends "main.html" %} {% block content %}
 
 <style>
-    .profile-container{
+    .profile-container {
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
+        gap: 20px; /* Optional spacing between columns */
+    }
+    .home-container {
+    }
+
+    .home-container > div {
+        overflow-y: auto;
+        max-height: 100%; /* Ensures it takes full height of .home-container */
+        padding: 10px; /* Optional for better spacing */
+    }
+
+    /* Optional: Custom scrollbar styling */
+    .home-container > div::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .home-container > div::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 4px;
+    }
+
+    .home-container > div::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
     }
 </style>
 
-<div class="container"style="position: relative; top:200px !important">
-    <h1>{{user.username}}</h1>
-
+<div class="home-container container">
+    
     <div class="profile-container">
         <div>
-            {% include 'base/topics_component.html' %}
+            <div style="position: fixed">
+                <h1>{{user.username}}</h1>
+                {% include 'base/topics_component.html' %}
+            </div>
         </div>
         <div>
             {% include 'base/feed_component.html' %}
+            
+            <nav aria-label="Page navigation example" class="my-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <div>
-            {% include 'base/activity_component.html' %}
-        </div>
+        <div>{% include 'base/activity_component.html' %}</div>
     </div>
 </div>
 

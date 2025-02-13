@@ -1,30 +1,38 @@
-{% extends 'main.html' %}
+{% extends 'main.html' %} {% block content %} {% if page == 'login' %}
 
-{% block content %}
-
-{% if page == 'login' %}
-
-<div class="container" style="position: relative; top:200px !important">
-    <form action="" method="POST">
+<div
+    class="container d-flex justify-center items-center flex-column"
+    style="align-items: center"
+>
+    <form action="" class="" style="width: 40%" method="POST">
         {% csrf_token %}
 
-        <label for="username">Username</label>
-        <input
-            type="text"
-            name="username"
-            placeholder="Enter username"
-            id="username"
-        />
+        <h3 style="color: #28c7a5">Login</h3>
 
-        <label for="username">Password:</label>
-        <input
-            type="password"
-            name="password"
-            placeholder="Enter password"
-            id="password"
-        />
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+                type="text"
+                name="username"
+                placeholder="Enter username"
+                id="username"
+                class="form-control py-3"
+                aria-describedby="usernameHelp"
+            />
+        </div>
 
-        <input type="submit" value="Login" />
+        <div class="mb-3">
+            <label for="username" class="form-label">Password:</label>
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                id="password"
+                class="form-control py-3"
+            />
+        </div>
+
+        <button type="submit" class="btn btn-primary my-3">Login</button>
     </form>
 
     <p>Haven't signed up?</p>
@@ -33,10 +41,9 @@
 
 {% else %}
 
-<div class="container" style="position: relative; top:200px !important">
+<div class="container" style="position: relative; top: 200px !important">
     <form action="" method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
+        {% csrf_token %} {{form.as_p}}
         <input type="submit" value="Register" />
     </form>
 
@@ -44,6 +51,4 @@
     <a href="{% url 'login' %}">Log In</a>
 </div>
 
-{% endif %}
-
-{% endblock %}
+{% endif %} {% endblock %}

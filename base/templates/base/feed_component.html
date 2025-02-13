@@ -1,16 +1,100 @@
-<div>
-    {% for room in rooms%}
-    <div>
+{% for room in rooms%}
+<style>
+    .feed-item {
+        background: #fff; /* Light background for contrast */
+        border: 1px solid #ddd; /* Subtle border like SO */
+        border-radius: 5px;
+        margin-bottom: 15px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    .feed-item-body{
+        padding: 15px;
+    }
+
+    .feed-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        margin-bottom: 8px;
+        color: #6a737d; /* SO uses a gray tone for metadata */
+    }
+
+    .author {
+        font-weight: bold;
+        color: #0074cc; /* SO-like blue for user links */
+        text-decoration: none;
+    }
+
+    .date {
+        font-size: 12px;
+        color: #888;
+    }
+
+    .feed-actions {
+        margin-bottom: 8px;
+    }
+
+    .edit {
+        color: #0074cc;
+        margin-right: 10px;
+    }
+
+    .delete {
+        color: #d9534f;
+        font-weight: bold;
+    }
+
+    .feed-title {
+        font-size: 18px;
+        margin: 5px 0;
+    }
+
+    .room-link {
+        color: #0074cc;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .room-link:hover {
+        text-decoration: underline;
+    }
+
+    .topic {
+        font-size: 14px;
+        color: #6a737d;
+    }
+
+    .description{
+        font-size: 0.8em;
+        color: #444;
+    }
+</style>
+
+<div class="feed-item">
+    <div class="feed-header card-header m-0">
+        <a href="{% url 'user-profile' room.host.id %}" class="author"
+            >@{{ room.host.username }}</a
+        >
+        <span class="date">{{ room.created_at|date:"M d, Y H:i" }}</span>
         {% if request.user == room.host %}
-            <a href="{% url "update-room" room.id %}">Edit</a>
-            <a href="{% url "delete-room" room.id %}" class="text-danger fs-5 px-2">Delete</a>
-            <br>
+        <div class="feed-actions m-0">
+            <a href="{% url 'update-room' room.id %}" class="edit">Edit</a>
+            <a href="{% url 'delete-room' room.id %}" class="delete">Delete</a>
+        </div>
         {% endif %}
-        
-        <a href="{% url 'user-profile' room.host.id %}">@{{room.host.username}}</a>
-        <h5>{{room.id}} -- <a href={% url "room" room.id %}>{{room.name}}</a></h5>
-        <small>{{room.topic.name}}</small>
-        <hr> 
     </div>
-    {% endfor %}
+
+    <div class="feed-item-body">
+    
+        <h5 class="feed-title">
+            {{ room.id }} --
+            <a href="{% url 'room' room.id %}" class="room-link">{{ room.name }}</a>
+        </h5>
+        <p class="description">{{room.description}}</p> 
+        <small class="topic">{{ room.topic.name }}</small>
+    </div>
+    
 </div>
+{% endfor %}
