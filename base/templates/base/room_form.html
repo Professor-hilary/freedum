@@ -1,11 +1,48 @@
-{% extends "main.html" %}
-
-{% block content %}
-<div class="container" style="">
+{% extends "main.html" %} {% block content %}
+<div class="container w-50" style="">
     <form action="" method="POST">
         {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="submit">
+        <div class="form-field d-flex flex-column">
+            {{form.topic.label_tag}}
+
+            <select
+                name="topic"
+                id="id_topic"
+                style="
+                    display: block;
+                    width: 100%;
+                    padding: 10px;
+                    font-size: 16px;
+                    line-height: 1.5;
+                    color: #495057;
+                    background-color: #fff;
+                    border: 1px solid #ced4da;
+                    border-radius: 4px;
+                    transition: border-color 0.2s, box-shadow 0.2s;
+                "
+            >
+                {% for topic in form.topic %} {{topic}} {% endfor %}
+            </select>
+        </div>
+        <div class="form-field d-flex flex-column">
+            {{form.name.label_tag}}
+            
+            <input type="text" name="name" id=""  class="form-control">
+            {% comment %} {{form.name}} {% endcomment %}
+        </div>
+        <div class="form-field d-flex flex-column">
+            {{form.description.label_tag}}
+            <textarea
+                name="description"
+                id=""
+                cols="30"
+                placeholder="Enter description..."
+                class="form-control"
+                rows="10"
+                style="resize: none"
+            ></textarea>
+        </div>
+        <button class="btn btn-primary my-3" type="submit">submit</button>
     </form>
 </div>
 {% endblock content %}
