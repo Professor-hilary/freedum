@@ -30,7 +30,7 @@ function createWindow() {
         mainWindow = null;
     })
 }
-
+ 
 // Handle app errors globally
 process.on('uncaughtException', (error) => {
     dialog.showErrorBox('Uncaight Exception', error.message);
