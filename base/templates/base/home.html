@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% load static %}
+
 
 <style>
     .home-container {
@@ -32,9 +34,43 @@
 </style>
 
 
-<div class='home-container container'>
+<div class="home-container container">
     <div>
-        <div style="position: fixed;">
+        <div style="position: fixed;" class='d-flex flex-column'>
+            <div class="d-flex my-2" style="">
+                <div class="border boder-1 mr-2"
+                    style="
+                        width: 70px;
+                        overflow: hidden;
+                        object-fit: contain;
+                        border-radius: 5%;
+                    ">
+                    <img
+                        src="{% static 'img/profile.png' %}"
+                        alt=""
+                        style="width: 100% !important"
+                        srcset=""
+                        class=""
+                    />
+                </div>
+
+                <div class="container px-0">
+                    {% if request.user.is_authenticated %}
+                    <div class="d-flex flex-column">
+                        <p class="m-0">Hello {{ request.user }}</p>
+                        <a href="{% url 'logout' %}" class="text-danger">(Logout)</a>
+                    </div>
+                    {% else %}
+                    <div class="d-flex flex-column">
+                        <p class="m-0"> Hello Guest User</p>
+                        <a href="{% url 'login' %}">(Login)</a>
+                    </div>
+                     
+                    {% endif %}
+                </div>
+            </div>
+            <div class="bg-warning my-2" style="width: 100%; height: 1px;"></div>
+
             {% include "base/topics_component.html" %}
         </div>
     </div>
@@ -43,11 +79,7 @@
         <div class="d-flex mb-1" style="justify-content: space-between; align-items: center;">
             <h3>Recent Rooms</h3>
             
-            <a href="{% url "create-room" %}">
-                <button class="btn btn-primary">
-                    Create Room
-                </button>
-            </a>
+            <a href="{% url "create-room" %}"><button class="btn btn-primary">Create Room</button></a>
         </div>
         <p class="mb-4">{{room_count}} rooms available</p>
     
