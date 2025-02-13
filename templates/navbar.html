@@ -1,3 +1,5 @@
+{% load static %}
+
 <style>
   .container-fluid {
     padding-left: 0px;
@@ -58,6 +60,20 @@
         <input class="form-control w-100 mr-2" type="search" name="q" placeholder="Search" aria-label="Search" />
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
+      
+      {% comment %} <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Dropdown button
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div> {% endcomment %}
+      <div class="border boder-1" style="width: 35px; height: 35px;overflow: hidden;object-fit: contain; border-radius: 5%;">
+        <img src="{% static 'img/profile.png' %}" alt="" style="width:100% !important" srcset="" class="">
+      </div>
     </div>
   </nav>
 
