@@ -1,12 +1,9 @@
 {% extends 'main.html' %} {% block content %} {% if page == 'login' %}
 
-<div
-    class="d-flex flex-column"
-    style="align-items: center; height: 90vh;"
->
+<div class="d-flex flex-column" style="align-items: center; height: 90vh">
     <div
         class="container py-5 bg-dark w-50 d-flex justify-center items-center flex-column mt-5"
-        style="align-items: center; background-color:;"
+        style="align-items: center; background-color: "
     >
         <form action="" class="" style="width: 80%" method="POST">
             {% csrf_token %}
@@ -15,52 +12,129 @@
             <h5 style="color: #aaa">Good to see you again</h5>
 
             <div class="mb-3 mt-4">
-                <label for="username" class="form-label" style="color: white;">USERNAME <span class="text-danger">*</span></label>
+                <label for="username" class="form-label" style="color: white"
+                    >USERNAME <span class="text-danger">*</span></label
+                >
                 <input
                     type="text"
                     name="username"
                     placeholder="Enter username"
                     id="username"
-                    style="height: 40px; background: #6c757d !important;"
+                    style="height: 40px; "
                     class="form-control py-3"
                     aria-describedby="usernameHelp"
-
                 />
             </div>
 
             <div class="mb-3">
-                <label for="username" class="form-label" style="color: white;">PASSWORD <span class="text-danger">*</span> </label>
+                <label for="username" class="form-label" style="color: white"
+                    >PASSWORD <span class="text-danger">*</span>
+                </label>
                 <input
                     type="password"
                     name="password"
                     placeholder="Enter password"
                     id="password"
-                    class="form-control py-3" 
-                    style="height: 40px; background: #6c757d !important;"
-
+                    class="form-control py-3"
+                    style="height: 40px; "
                 />
             </div>
 
-            <button type="submit" class="btn btn-primary my-3 w-100">Login</button>
+            <button type="submit" class="btn btn-primary my-3 w-100">
+                Login
+            </button>
 
             <div class="d-flex w-50">
-                <p style="color: white;" class="pr-2">Haven't signed up?</p>
+                <p style="color: white" class="pr-2">Haven't signed up?</p>
                 <a href="{% url 'register' %}">Sign Up</a>
             </div>
         </form>
-
     </div>
 
     {% else %}
 
-    <div class="container" style="">
-        <form action="" method="POST">
-            {% csrf_token %} {{form.as_p}}
-            <input type="submit" value="Register" />
+    <div
+        class="container py-5 bg-dark w-50 d-flex justify-center items-center flex-column mt-5"
+        style="align-items: center; background-color: "
+    >
+        <form action="" style="width: 80%" method="POST">
+            {% csrf_token %}
+
+            <h3 style="color: #28c7a5">Good To Have You Here</h3>
+            <h5 style="color: #aaa">Pleased to have you!</h5>
+            {% comment %} {{form.as_p}} {% endcomment %}
+
+            <div class="d-flex flex-column mt-3">
+                {% comment %} <label for="id_username">USERNAME</label> {% endcomment %}
+                <input
+                    type="text"
+                    name="username"
+                    maxlength="150"
+                    autocapitalize="none"
+                    autocomplete="username"
+                    autofocus=""
+                    required="" class="form-control"
+                    aria-describedby="id_username_helptext"
+                    id="id_username"
+                    placeholder="Unique Username"
+                />
+
+                <span class="helptext" id="id_username_helptext"
+                    >Required Letters, digits and
+                    @ or . or + or - or _ only.</span
+                >
+            </div>
+
+            <div class="d-flex flex-column mt-3">
+                {% comment %} <label for="id_password1">PASSWORD</label> {% endcomment %}
+                <input
+                    type="password"
+                    name="password1"
+                    autocomplete="new-password"
+                    required="" class="form-control"
+                    aria-describedby="id_password1_helptext"
+                    id="id_password1"
+                    placeholder="New Password"
+                />
+
+                <span class="helptext" id="id_password1_helptext">Password should be a mix of numbers, letters and simbols</span>
+            </div>
+
+            <div class="d-flex flex-column mt-3">
+                {% comment %} <label for="id_password2">PASSWORD CONFIRM</label> {% endcomment %}
+                <input
+                    type="password"
+                    name="password2"
+                    autocomplete="new-password"
+                    required="" class="form-control"
+                    aria-describedby="id_password2_helptext"
+                    id="id_password2"
+                    placeholder="Repeat New Password"
+                />
+
+                <span class="helptext" id="id_password2_helptext"
+                    >Enter the same password as before, for verification.</span
+                >
+            </div>
+
+            <button
+                type="submit"
+                value="Register"
+                class="btn btn-primary my-3 w-100"
+            >
+                Register
+            </button>
+            <div class="d-flex w-50">
+                <p style="color: white" class="pr-2">
+                    Already have an account?
+                </p>
+                <a href="{% url 'login' %}">Log in</a>
+            </div>
         </form>
 
-        <p>Already have an account?</p>
-        <a href="{% url 'login' %}">Log In</a>
+        <div class="messages">
+            <li></li>
+        </div>
     </div>
 </div>
 {% endif %} {% endblock %}
