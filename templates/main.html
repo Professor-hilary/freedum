@@ -14,11 +14,80 @@
         <link rel="stylesheet" href="{% static 'css/main.css' %}" media="screen"> 
 
         <style>
-            form{}
+            :root {
+                --bg-color: #ffffff;
+                --text-color: #000000;
+                --toggle-bg: #ddd;
+                --toggle-circle: #fff;
+                --card-color: #fff;
+                --card-border-color: #ddd;
+                --nav-bar: #f9f9f9;
+                --search-color: #fff;
+                --search-border: inherit;
+                --feed-description: #444;
+            }
+            
+            .dark-mode {
+                --bg-color: #343a40;;
+                --text-color: #ffffff;
+                --toggle-bg: #444;
+                --toggle-circle: #222;
+                --card-color: rgb(42, 48, 54);;
+                --card-border-color: #777;
+                --nav-bar:rgb(41, 52, 63);
+                --search-color: rgb(40, 54, 68);
+                --search-border: #777;
+                --feed-description: #aaa;
+            }
+        
+            body {
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                transition: background-color 0.3s, color 0.3s;
+                /*display: flex;*/
+                /*justify-content: center;*/
+                /*align-items: center;*/
+                /*height: 100vh;*/
+                /*flex-direction: column;*/
+            }
+        
+            .toggle-container {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        
+            .toggle-switch {
+                width: 50px;
+                height: 25px;
+                background-color: var(--toggle-bg);
+                border-radius: 50px;
+                position: relative;
+                transition: background-color 0.3s;
+            }
+        
+            .toggle-circle {
+                width: 20px;
+                height: 20px;
+                background-color: var(--toggle-circle);
+                border-radius: 50%;
+                position: absolute;
+                top: 50%;
+                left: 4px;
+                transform: translateY(-50%);
+                transition: left 0.3s, background-color 0.3s;
+            }
+        
+            .dark-mode .toggle-circle {
+                left: 26px;
+            }
         </style>
     </head>
 
-    <body class='pt-0'>
+    <body class='pt-0' style="background-color: var(--bg-color) !important;">
         {% include "navbar.html" %}
         
         {% if messages %}

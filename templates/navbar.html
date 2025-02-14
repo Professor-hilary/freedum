@@ -13,8 +13,9 @@
     .parent {
         position: sticky;
         top: 0px;
-        background-color: #f9f9f9;
+        background-color: var(--nav-bar);
     }
+  
 </style>
 
 <div class="parent" style="position: sticky">
@@ -62,10 +63,43 @@
                     name="q"
                     placeholder="Search"
                     aria-label="Search"
+                    style="background-color: var(--search-color);border-color: var(--search-border);"
                 />
             </form>
+            <label class="toggle-container">
+                <span id="toggle-label">Dark Mode</span>
+                <div class="toggle-switch">
+                    <div class="toggle-circle"></div>
+                </div>
+            </label>
         </div>
     </nav>
 
     <hr class="m-0 bg-warning" style="" />
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleSwitch = document.querySelector(".toggle-switch");
+        const body = document.body;
+        const toggleLabel = document.getElementById("toggle-label");
+
+        // Check saved theme and apply
+        if (localStorage.getItem("theme") === "dark") {
+            body.classList.add("dark-mode");
+            toggleLabel.textContent = "Light Mode";
+        }
+
+        toggleSwitch.addEventListener("click", () => {
+            if (body.classList.contains("dark-mode")) {
+                body.classList.remove("dark-mode");
+                localStorage.setItem("theme", "light");
+                toggleLabel.textContent = "Dark Mode";
+            } else {
+                body.classList.add("dark-mode");
+                localStorage.setItem("theme", "dark");
+                toggleLabel.textContent = "Light Mode";
+            }
+        });
+    });
+</script>
