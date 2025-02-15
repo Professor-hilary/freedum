@@ -44,7 +44,38 @@
             </div>
         </div>
         <div>
-            <h3 class="pb-3">{{user.username}}'s activities</h3>
+            <div class="mb-4">
+                <div class="d-flex pb-3">
+                    <div
+                        class="profile-pic border mr-3"
+                        style="width: 100px; height: 100px"
+                    >
+                        <img src="" alt="" />
+                    </div>
+                    <div
+                        class="d-flex flex-column"
+                        style="justify-content: space-between; height: 100px"
+                    >
+                        <h3 class="m-0 p-0">{{user.username}}'s activities</h3>
+                        <p class="m-0 p-0">12 POST</p>
+                        <i class="m-0 p-0">Joined 23/12/2024</i>
+                    </div>
+                </div>
+
+                <div>
+                    <h5>ABOUT</h5>
+                    <p class="about">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Earum accusantium delectus, quaerat dolores magnam
+                        ipsam! Ea minus quisquam repellendus veritatis, illum
+                        dignissimos libero doloribus, rem, eos eligendi
+                        asperiores a architecto.
+                    </p>
+                </div>
+            </div>
+
+            <h5 class="my-4">{{user.username}}'s Rooms</h5>
+
             {% include 'base/feed_component.html' %}
 
             <nav aria-label="Page navigation example" class="my-5">

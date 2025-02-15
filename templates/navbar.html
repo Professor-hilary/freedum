@@ -96,12 +96,22 @@
                     </button>
                 </div>
             </form>
-            <label class="toggle-container">
+            <label class="toggle-container mb-0">
                 <span id="toggle-label">Dark Mode</span>
                 <div class="toggle-switch">
                     <div class="toggle-circle"></div>
                 </div>
             </label>
+            <div class="p-3 d-flex" style="justify-content: center; align-items: center; ">
+                <span class="mb-0" style="font-weight: bold;">Setting</span>
+                <a href="{% url "update-user" %}" class="" >
+                    <i
+                        class="fa fa-cog pl-2"
+                        style="font-size: 20px"
+                        aria-hidden="true"
+                    ></i
+                ></a>
+            </div>
         </div>
     </nav>
 

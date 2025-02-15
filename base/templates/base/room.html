@@ -1,5 +1,5 @@
 {% extends "main.html" %} {% block content %}
-
+{% load icons %}
 <style>
     .room-container {
         display: grid;
@@ -16,14 +16,14 @@
             <div class="feed-actions m-0">
                 <a href="{% url 'update-room' room.id %}" class="edit"
                     ><button class="btn btn-primary py-0" style="">
-                        Edit
+                        Edit <i class="fa fa-edit" aria-hidden="true"></i>
                     </button></a
                 >
                 <a
                     href="{% url 'delete-room' room.id %}"
                     class="delete text-danger"
                     ><button class="btn btn-danger py-0" style="">
-                        Delete
+                        Delete <i class="fa fa-trash" aria-hidden="true"></i>
                     </button></a
                 >
             </div>
