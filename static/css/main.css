@@ -2,7 +2,7 @@ body {
     background-color: white !important;
 }
 
-/* Hide scrollbar Chrome, Safari, Edge */  
+/* Hide scrollbar Chrome, Safari, Edge */
 ::-webkit-scrollbar {
     display: none !important;
 }
@@ -15,4 +15,4 @@ html {
 /* Hide scrollbar Internet Explorer, Edge */
 body {
     -ms-overflow-style: none !important;
-} 
+}

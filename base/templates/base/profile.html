@@ -29,15 +29,13 @@
         background-color: #555;
     }
 
-    .pagination > li > a{
+    .pagination > li > a {
         background-color: var(--bg-color) !important;
         border-color: var(--search-border) !important;
     }
-   
 </style>
 
 <div class="home-container container my-5">
-    
     <div class="profile-container">
         <div>
             <div style="position: fixed">
@@ -48,25 +46,28 @@
         <div>
             <h3 class="pb-3">{{user.username}}'s activities</h3>
             {% include 'base/feed_component.html' %}
-            
+
             <nav aria-label="Page navigation example" class="my-5">
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled">
                         <a class="page-link">Previous</a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
                     <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
                     </li>
                 </ul>
             </nav>
         </div>
-        <div>
-            
-            {% include 'base/activity_component.html' %}
-        </div>
+        <div>{% include 'base/activity_component.html' %}</div>
     </div>
 </div>
 

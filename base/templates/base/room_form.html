@@ -13,7 +13,8 @@
                 value="{{room.topic.name}}"
                 list="topic-list"
                 style="
-                    background-color: transparent; color: var(--text-color);
+                    background-color: transparent;
+                    color: var(--text-color);
                     border-color: var(--search-border);
                 "
             />
@@ -37,7 +38,8 @@
                 id=""
                 class="form-control"
                 style="
-                    background-color: transparent; color: var(--text-color);
+                    background-color: transparent;
+                    color: var(--text-color);
                     border-color: var(--search-border);
                 "
             />
@@ -68,9 +70,11 @@
             <button class="btn btn-primary my-3 px-4 mr-4" type="submit">
                 Create Room
             </button>
-            <button class="btn btn-secondary my-3 px-4" type="button">
-                Cancel
-            </button>
+            <a href="{{request.META.HTTP_REFERER}}" class="text-white">
+                <button class="btn btn-secondary my-3 px-4" type="button">
+                    Go Back
+                </button>
+            </a>
         </div>
     </form>
 </div>

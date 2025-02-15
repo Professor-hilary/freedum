@@ -2,16 +2,20 @@
 
 {% load static %}
 
-<html style="scrollbar-width: none;">
+<html style="scrollbar-width: none">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>freedum</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- Bootstrap CSS (Offline) -->
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/main.css' %}" media="screen"> 
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+        <link
+            rel="stylesheet"
+            href="{% static 'css/main.css' %}"
+            media="screen"
+        />
 
         <style>
             :root {
@@ -27,29 +31,31 @@
                 --feed-description: #444;
                 --comment-box: #fff;
                 --comment-box-text: #444;
+                --tag-color: #ffd7b5;
             }
-            
+
             .dark-mode {
-                --bg-color: #051024;;
+                --bg-color: #051024;
                 --text-color: #ffffff;
                 --toggle-bg: #061831;
                 --toggle-circle: #33466c;
                 --card-color: #061831;
                 --card-border-color: #33466c;
-                --nav-bar:#0b1c3e;
+                --nav-bar: #0b1c3e;
                 --search-color: #11244a;
                 --search-border: #33466c;
                 --feed-description: #aaa;
                 --comment-box: #10254a;
                 --comment-box-text: #fff;
+                --tag-color: #33466c;
             }
-        
+
             body {
                 background-color: var(--bg-color);
                 color: var(--text-color);
                 transition: background-color 0.3s, color 0.3s;
             }
-        
+
             .toggle-container {
                 display: flex;
                 align-items: center;
@@ -58,7 +64,7 @@
                 font-weight: bold;
                 cursor: pointer;
             }
-        
+
             .toggle-switch {
                 width: 50px;
                 height: 25px;
@@ -67,7 +73,7 @@
                 position: relative;
                 transition: background-color 0.3s;
             }
-        
+
             .toggle-circle {
                 width: 20px;
                 height: 20px;
@@ -79,29 +85,21 @@
                 transform: translateY(-50%);
                 transition: left 0.3s, background-color 0.3s;
             }
-        
+
             .dark-mode .toggle-circle {
                 left: 26px;
             }
         </style>
     </head>
 
-    <body class='pt-0' style="background-color: var(--bg-color) !important;">
-        {% include "navbar.html" %}
-        
-        {% if messages %}
+    <body class="pt-0" style="background-color: var(--bg-color) !important">
+        {% include "navbar.html" %} {% if messages %}
         <ul class="messages">
             {% for message in messages %}
-                <li>
-                    {{message}}
-                </li>
+            <li>{{message}}</li>
             {% endfor %}
         </ul>
-        {% endif %}
-
-        {% block content %}
-        
-        {% endblock  %}
+        {% endif %} {% block content %} {% endblock %}
     </body>
 
     <!-- Bootstrap JS (Offline) -->

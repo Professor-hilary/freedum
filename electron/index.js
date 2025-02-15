@@ -12,12 +12,12 @@ function createWindow() {
             webPreferences: {
                 nodeIntegration: true,
                 scrollBounce: false,
-                enableBlinkFeatures:true
+                enableBlinkFeatures: true
             }
         });
 
         // Load the Django app (adjust port if needed)
-        mainWindow.loadURL('http://127.0.0.1:8000'); 
+        mainWindow.loadURL('http://127.0.0.1:8000');
 
         // Remove menu bar
         Menu.setApplicationMenu(null);
@@ -30,7 +30,7 @@ function createWindow() {
         mainWindow = null;
     })
 }
- 
+
 // Handle app errors globally
 process.on('uncaughtException', (error) => {
     dialog.showErrorBox('Uncaight Exception', error.message);

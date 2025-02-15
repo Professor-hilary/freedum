@@ -8,17 +8,37 @@
     }
 </style>
 
-<div
-    class="room-container container mt-5"
-    style="position: relative;"
->
+<div class="room-container container mt-5" style="position: relative">
     <div style="padding: 20px">
-        <h1>{{room.name}}</h1>
-
+        <div class="mb-5 d-flex" style="justify-content: space-between">
+            <span>Authored by @{{ room.host.username }}</span>
+            {% if request.user == room.host %}
+            <div class="feed-actions m-0">
+                <a href="{% url 'update-room' room.id %}" class="edit"
+                    ><button class="btn btn-primary py-0" style="">
+                        Edit
+                    </button></a
+                >
+                <a
+                    href="{% url 'delete-room' room.id %}"
+                    class="delete text-danger"
+                    ><button class="btn btn-danger py-0" style="">
+                        Delete
+                    </button></a
+                >
+            </div>
+            {% endif %}
+        </div>
+        <h3>{{room.name}}</h3>
         <p>{{room.description}}</p>
+        <span
+            class="px-2 py-1"
+            style="background-color: var(--tag-color); border-radius: 20px"
+            >#{{room.topic}}</span
+        >
 
         <div class="comment-wrapper mt-5">
-            <h3>Comments</h3>
+            <span class="" style="font-weight: bold"> Comments</span>
             <hr />
 
             {% if request.user.is_authenticated %}
@@ -41,7 +61,6 @@
                     <button type="submit" class="btn btn-outline-primary my-3">
                         comment
                     </button>
-                        
                 </form>
             </div>
             {% endif %} {% for message in room_messages %}
@@ -51,8 +70,8 @@
                 {% endif %}
                 <small
                     >@{{message.user}} {{message.created|timesince}} ago</small
-                    >
-                    <p>{{message.body}}</p>
+                >
+                <p>{{message.body}}</p>
                 <hr />
             </div>
             {% endfor %}

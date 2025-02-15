@@ -4,21 +4,22 @@
 
 **Freedum** is an open platform designed for leisurers to share their thoughts, news, and lifestyle experiences in the form of blogs. The platform enables users to post content and receive reviews and ratings from the community, much like TikTok but tailored for writers and bloggers.
 
-Built with a combination of **Django** (for the backend), **ReactJS** (for the web and UI), and **Electron** (for desktop support), Freedum allows users to easily create and interact with content across multiple platforms. The project may later integrate **Bootstrap** for a more refined and responsive UI. 
+Built with a combination of **Django** (for the backend), **ReactJS** (for the web and UI), and **Electron** (for desktop support), Freedum allows users to easily create and interact with content across multiple platforms. The project may later integrate **Bootstrap** for a more refined and responsive UI.
 
 ### Key Features
-- **Blogging Platform**: Users can post articles on a variety of topics, including news, lifestyle, and personal stories.
-- **Reviews and Ratings**: Each post allows the community to interact by providing feedback through reviews and ratings.
-- **Cross-Platform**: Available as both a web app (via ReactJS) and a desktop app (via Electron).
+
+-   **Blogging Platform**: Users can post articles on a variety of topics, including news, lifestyle, and personal stories.
+-   **Reviews and Ratings**: Each post allows the community to interact by providing feedback through reviews and ratings.
+-   **Cross-Platform**: Available as both a web app (via ReactJS) and a desktop app (via Electron).
 
 ---
 
 ## Technologies
 
-- **Backend**: [Django](https://www.djangoproject.com/)
-- **Frontend**: [ReactJS](https://reactjs.org/)
-- **Desktop Application**: [Electron](https://www.electronjs.org/)
-- **Potential UI Framework**: [Bootstrap](https://getbootstrap.com/)
+-   **Backend**: [Django](https://www.djangoproject.com/)
+-   **Frontend**: [ReactJS](https://reactjs.org/)
+-   **Desktop Application**: [Electron](https://www.electronjs.org/)
+-   **Potential UI Framework**: [Bootstrap](https://getbootstrap.com/)
 
 ---
 
@@ -29,23 +30,25 @@ Built with a combination of **Django** (for the backend), **ReactJS** (for the w
 Before running the project locally, you must set up the environment. This step is essential for configuring dependencies and environment variables.
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/Professor-hilary/freedum.git
-   cd freedum
-   ```
+
+    ```bash
+    git clone https://github.com/Professor-hilary/freedum.git
+    cd freedum
+    ```
 
 2. Set up the environment:
-   - Install Python dependencies:
-     ```bash
-     pip install -r requirements.txt
-     ```
-   - Set up the Node.js environment:
-     ```bash
-     npm install
-     ```
+
+    - Install Python dependencies:
+        ```bash
+        pip install -r requirements.txt
+        ```
+    - Set up the Node.js environment:
+        ```bash
+        npm install
+        ```
 
 3. Configure the environment variables:
-   - Copy the `.env.example` file to `.env` and update the necessary environment variables.
+    - Copy the `.env.example` file to `.env` and update the necessary environment variables.
 
 ---
 
@@ -54,59 +57,66 @@ Before running the project locally, you must set up the environment. This step i
 ### Backend (Django)
 
 1. Set up the virtual environment:
-   ```bash
-   python -m venv env
-   source env/bin/activate  # On Windows: env\Scripts\activate
-   ```
+
+    ```bash
+    python -m venv env
+    source env/bin/activate  # On Windows: env\Scripts\activate
+    ```
 
 2. Install the backend dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 3. Run migrations:
-   ```bash
-   python manage.py migrate
-   ```
+
+    ```bash
+    python manage.py migrate
+    ```
 
 4. Start the Django development server:
-   ```bash
-   python manage.py runserver
-   ```
+    ```bash
+    python manage.py runserver
+    ```
 
 ### Frontend (ReactJS)
 
 1. Navigate to the frontend directory:
-   ```bash
-   cd frontend
-   ```
+
+    ```bash
+    cd frontend
+    ```
 
 2. Install the ReactJS dependencies:
-   ```bash
-   npm install
-   ```
+
+    ```bash
+    npm install
+    ```
 
 3. Start the React development server:
-   ```bash
-   npm start
-   ```
+    ```bash
+    npm start
+    ```
 
 ### Desktop Application (Electron)
 
 1. Navigate to the Electron directory:
-   ```bash
-   cd electron
-   ```
+
+    ```bash
+    cd electron
+    ```
 
 2. Install the Electron dependencies:
-   ```bash
-   npm install
-   ```
+
+    ```bash
+    npm install
+    ```
 
 3. Start the Electron application:
-   ```bash
-   npm start
-   ```
+    ```bash
+    npm start
+    ```
 
 ---
 
