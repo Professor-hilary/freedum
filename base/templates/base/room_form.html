@@ -1,36 +1,51 @@
 {% extends "main.html" %} {% block content %}
-<div class="container w-50" style="">
+<div class="container w-50 mt-5" style="">
     <form action="" method="POST">
-        {% csrf_token %}
-        <div class="form-field d-flex flex-column">
-            {{form.topic.label_tag}}
-
-            <select
+        {% csrf_token %} {% comment %} Form topic section {% endcomment %}
+        <div class="form__group d-flex flex-column pb-2">
+            <label for="room_topic">Room Topic</label>
+            <input
+                class="form-control"
+                type="text"
                 name="topic"
-                id="id_topic"
+                id=""
+                required
+                value="{{room.topic.name}}"
+                list="topic-list"
                 style="
-                    display: block;
-                    width: 100%;
-                    padding: 10px;
-                    font-size: 16px;
-                    line-height: 1.5;
-                    color: #495057;
-                    background-color: #fff;
-                    border: 1px solid #ced4da;
-                    border-radius: 4px;
-                    transition: border-color 0.2s, box-shadow 0.2s;
+                    background-color: transparent; color: var(--text-color);
+                    border-color: var(--search-border);
                 "
-            >
-                {% for topic in form.topic %} {{topic}} {% endfor %}
-            </select>
+            />
+
+            <datalist id="topic-list">
+                <select name="" id="room_topic">
+                    {% for topic in topics %}
+                    <option value="{{topic.name}}">{{topic.name}}</option>
+                    {% endfor %}
+                </select>
+            </datalist>
         </div>
-        <div class="form-field d-flex flex-column">
+
+        {% comment %} Form Name section {% endcomment %}
+        <div class="form-field d-flex flex-column pb-2">
             {{form.name.label_tag}}
-            
-            <input type="text" name="name" id=""  class="form-control">
+
+            <input
+                type="text"
+                name="name"
+                id=""
+                class="form-control"
+                style="
+                    background-color: transparent; color: var(--text-color);
+                    border-color: var(--search-border);
+                "
+            />
             {% comment %} {{form.name}} {% endcomment %}
         </div>
-        <div class="form-field d-flex flex-column">
+
+        {% comment %} Form description section {% endcomment %}
+        <div class="form-field d-flex flex-column pb-2">
             {{form.description.label_tag}}
             <textarea
                 name="description"
@@ -38,11 +53,25 @@
                 cols="30"
                 placeholder="Enter description..."
                 class="form-control"
-                rows="10"
-                style="resize: none"
+                rows="6"
+                style="
+                    resize: none;
+                    background-color: transparent;
+                    border-color: var(--search-border);
+                    color: var(--text-color);
+                "
             ></textarea>
         </div>
-        <button class="btn btn-primary my-3" type="submit">submit</button>
+
+        {% comment %} Form Submit Button {% endcomment %}
+        <div class="d-flex gap-2">
+            <button class="btn btn-primary my-3 px-4 mr-4" type="submit">
+                Create Room
+            </button>
+            <button class="btn btn-secondary my-3 px-4" type="button">
+                Cancel
+            </button>
+        </div>
     </form>
 </div>
 {% endblock content %}

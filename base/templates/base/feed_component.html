@@ -89,7 +89,7 @@
     <div class="feed-item-body">
     
         <h5 class="feed-title">
-            {{ room.id }} --
+            {% comment %} {{ room.id }} -- {% endcomment %}
             <a href="{% url 'room' room.id %}" class="room-link">{{ room.name }}</a>
         </h5>
         <p class="description">{{room.description}}</p> 

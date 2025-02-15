@@ -8,8 +8,11 @@
     }
 </style>
 
-<div class="room-container container" style="position: relative">
-    <div>
+<div
+    class="room-container container mt-5"
+    style="position: relative;"
+>
+    <div style="padding: 20px">
         <h1>{{room.name}}</h1>
 
         <p>{{room.description}}</p>
@@ -17,7 +20,7 @@
         <div class="comment-wrapper mt-5">
             <h3>Comments</h3>
             <hr />
-            
+
             {% if request.user.is_authenticated %}
             <div class="comment-form">
                 <form action="" method="post">
@@ -27,33 +30,36 @@
                         aria-label="With textarea"
                         placeholder="Write you comment here..."
                         rows="4"
-                        style="resize: none"
+                        style="
+                            resize: none;
+                            background-color: var(--comment-box);
+                            color: var(--comment-box-text);
+                            border-color: var(--card-border-color);
+                        "
                         name="body"
                     ></textarea>
                     <button type="submit" class="btn btn-outline-primary my-3">
-                        Comment
+                        comment
                     </button>
+                        
                 </form>
             </div>
-            {% endif %}
-
-            {% for message in room_messages %}
-                <div>
-                    {% if request.user == message.user %}
-                    <a href="{% url 'delete-message' message.id %}">Delete</a>
-                    {% endif %}
-                    <small
-                        >@{{message.user}} {{message.created|timesince}} ago</small
+            {% endif %} {% for message in room_messages %}
+            <div>
+                {% if request.user == message.user %}
+                <a href="{% url 'delete-message' message.id %}">Delete</a>
+                {% endif %}
+                <small
+                    >@{{message.user}} {{message.created|timesince}} ago</small
                     >
                     <p>{{message.body}}</p>
-                    <hr />
-                </div>
+                <hr />
+            </div>
             {% endfor %}
         </div>
-
     </div>
 
-    <div>
+    <div style="padding: 20px">
         <h3>Participants</h3>
         <hr />
         {% for user in participants %}
