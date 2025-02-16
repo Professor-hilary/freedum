@@ -58,9 +58,15 @@
                     >
                         <h3 class="m-0 p-0">{{user.username}}'s activities</h3>
                         <p class="m-0 p-0">12 POST</p>
-                        <i class="m-0 p-0">Joined 23/12/2024</i>
+                        <i class="m-0 p-0">Joined {{user.date_joined}}</i>
                     </div>
                 </div>
+
+                {% if user.is_staff == True %}
+                <div class="container ml-0 pl-0 pb-4">
+                    <h5 style="color: #28a745;">Status: <i>Administrator</i></h5>
+                </div>
+                {% endif %}
 
                 <div>
                     <h5>ABOUT</h5>

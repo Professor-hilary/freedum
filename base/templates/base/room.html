@@ -38,7 +38,7 @@
         >
 
         <div class="comment-wrapper mt-5">
-            <span class="" style="font-weight: bold"> Comments</span>
+            <span class="" style="font-weight: bold">Comments</span>
             <hr />
 
             {% if request.user.is_authenticated %}
@@ -64,7 +64,7 @@
                 </form>
             </div>
             {% endif %} {% for message in room_messages %}
-            <div>
+            <div class="pl-3 pt-2" style="background-color: var(--comment-box);border-left: 3px solid gray;">
                 {% if request.user == message.user %}
                 <a href="{% url 'delete-message' message.id %}">Delete</a>
                 {% endif %}

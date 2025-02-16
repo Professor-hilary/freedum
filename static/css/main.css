@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: white !important;
 }
@@ -12,7 +16,61 @@ html {
     scrollbar-width: none !important;
 }
 
-/* Hide scrollbar Internet Explorer, Edge */
-body {
-    -ms-overflow-style: none !important;
+.nav-profile{
+    display: flex !important;
+}
+
+.search-bar {
+    display: none !important;
+}
+
+#toggle-label {
+    display: none !important;
+}
+
+.home-container {
+    display: grid;
+    grid-template-columns: 3fr;
+    gap: 20px; /* Optional spacing between columns */
+}
+
+.home-container .topic-column,
+.home-container .activities-column {
+    display: none !important;
+}
+
+.settings-toggle{
+    display: none !important;
+}
+
+/* Media Queries */
+@media screen and (min-width: 768px) {
+    .search-bar {
+        display: flex !important;
+    }
+
+    #toggle-label {
+        display: inline-block !important;
+    }
+
+    .settings-toggle{
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .home-container {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        gap: 20px; /* Optional spacing between columns */
+    }
+
+    .home-container .topic-column,
+    .home-container .activities-column {
+        display: flex !important;
+        flex-direction: column;
+    }
+    .nav-profile{        
+        display: none !important;
+    }
 }

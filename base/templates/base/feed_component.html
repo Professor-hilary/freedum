@@ -7,8 +7,8 @@
         margin-bottom: 15px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
     }
-    
-    .feed-item-body{
+
+    .feed-item-body {
         padding: 15px;
     }
 
@@ -66,7 +66,7 @@
         color: #6a737d;
     }
 
-    .description{
+    .description {
         font-size: 0.8em;
         color: var(--feed-description);
     }
@@ -87,14 +87,14 @@
     </div>
 
     <div class="feed-item-body">
-    
         <h5 class="feed-title">
             {% comment %} {{ room.id }} -- {% endcomment %}
-            <a href="{% url 'room' room.id %}" class="room-link">{{ room.name }}</a>
+            <a href="{% url 'room' room.id %}" class="room-link"
+                >{{ room.name }}</a
+            >
         </h5>
-        <p class="description">{{room.description}}</p> 
+        <p class="description">{{room.description}}</p>
         <small class="topic">{{ room.topic.name }}</small>
     </div>
-    
 </div>
 {% endfor %}

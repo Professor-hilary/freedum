@@ -16,6 +16,85 @@
         top: 0px;
         background-color: var(--nav-bar);
     }
+    /* Navbar Container */
+
+    /* Menu Button (Hamburger) */
+    .menu-toggle {
+        display: none;
+    }
+
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-icon div {
+        width: 100%;
+        height: 4px;
+        background: white;
+        margin: 5px 0;
+        transition: 0.3s;
+        z-index: 1000;
+    }
+
+    /* Menu */
+    .nav-links {
+        list-style: none;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        padding: 0 !important;
+        width: 50%;
+        background: var(--bg-color);
+        max-height: 0; /* Start as hidden */
+        overflow: hidden; /* Prevent content from being visible */
+        transition: max-height 0.3s ease-in-out;
+    }
+
+    .nav-links li {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        padding-right: 20px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--text-color);
+        padding: 12px 20px;
+        display: block;
+        text-align: center !important;
+        transition: background 0.3s;
+    }
+
+    .nav-links.open {
+        max-height: 300px; /* Adjust based on content size */
+    }
+
+    .nav-links a:hover {
+        background: #444;
+    }
+
+    .settings-toggle {
+        display: none !important;
+    }
+
+    .mobile-search {
+        display: flex !important;
+    }
+
+    /* Media Queries */
+    @media screen and (min-width: 768px) {
+        .settings-toggle {
+            display: flex !important;
+        }
+
+        .mobile-search {
+            display: none !important;
+        }
+    }
 </style>
 
 <div class="parent" style="position: sticky">
@@ -31,37 +110,13 @@
                     alt="logo"
                     srcset=""
             /></a>
-            {% comment %}
-            <div class="d-flex" id="navbarText">
-                <ul class="d-flex m-0">
-                    <li class="nav-item" style="height: fit-content">
-                        <a class="nav-link active" aria-current="page" href="/">
-                            Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            QA
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Tuitorial</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                </ul>
-            </div>
-            {% endcomment %}
+
             <form
                 action="{% url 'home' %}"
                 method="get"
-                class="d-flex m-0"
+                class="d-flex m-0 search-bar"
                 role="search"
-                style="width: 60%"
+                style="width: 40%"
             >
                 <div
                     class="input-group"
@@ -74,7 +129,7 @@
                         class="form-control my-0"
                         type="search"
                         name="q"
-                        placeholder="Looking for something...?"
+                        placeholder="Looking for something?"
                         aria-label="Search"
                         style="
                             background-color: var(--search-color);
@@ -96,26 +151,152 @@
                     </button>
                 </div>
             </form>
-            <label class="toggle-container mb-0">
-                <span id="toggle-label">Dark Mode</span>
-                <div class="toggle-switch">
-                    <div class="toggle-circle"></div>
+            <div class="settings-toggle">
+                <label class="toggle-container mb-0">
+                    <span id="toggle-label">Dark</span>
+                    <div class="toggle-switch">
+                        <div class="toggle-circle"></div>
+                    </div>
+                </label>
+                <div
+                    class="p-3 d-flex"
+                    style="justify-content: center; align-items: center"
+                >
+                    <span class="mb-0" style="font-weight: bold">Setting</span>
+                    <a href="{% url 'update-user' %}" class=""
+                        ><i
+                            class="fa fa-cog pl-2"
+                            style="font-size: 20px"
+                            aria-hidden="true"
+                        ></i
+                    ></a>
                 </div>
-            </label>
-            <div class="p-3 d-flex" style="justify-content: center; align-items: center; ">
-                <span class="mb-0" style="font-weight: bold;">Setting</span>
-                <a href="{% url "update-user" %}" class="" >
-                    <i
-                        class="fa fa-cog pl-2"
-                        style="font-size: 20px"
-                        aria-hidden="true"
-                    ></i
-                ></a>
+            </div>
+
+            <div
+                class="d-flex my-2 nav-profile"
+                style="
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                "
+            >
+                <div
+                    class="border boder-1"
+                    style="
+                        border-radius: 50%;
+                        overflow: hidden;
+                        object-fit: contain;
+                        border-color: var(--card-border-color) !important;
+                    "
+                >
+                    <img
+                        src="{% static 'img/profile.png' %}"
+                        alt=""
+                        style="width: 100% !important; height: 100% !important"
+                        srcset=""
+                        class=""
+                    />
+                </div>
+
+                <div
+                    class="container px-0 d-flex"
+                    style="display: flex; justify-content: center"
+                >
+                    {% if request.user.is_authenticated %} {% comment %}
+                    <div class="d-flex flex-column">
+                        <p class="m-0">Hello {{ request.user }}</p>
+                        <a href="{% url 'logout' %}" class="text-danger"
+                            >(Logout)</a
+                        >
+                    </div>
+                    {% else %}
+                    <div class="d-flex flex-column">
+                        <p class="m-0">Hello Guest User</p>
+                        <a href="{% url 'login' %}">(Login)</a>
+                    </div>
+                    {% endcomment %} {% endif %}
+                    <!-- Hamburger Icon -->
+                    <label for="menu-toggle" class="menu-icon">
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </label>
+                    <!-- Nav Links -->
+                    <ul class="nav-links">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/">Topics</a>
+                        </li>
+                        <li>
+                            <a href="/">Activities</a>
+                        </li>
+                        <li>
+                            Theme
+                            <label class="toggle-container mb-0">
+                                <span id="toggle-label">Dark</span>
+                                <div class="toggle-switch">
+                                    <div class="toggle-circle"></div>
+                                </div>
+                            </label>
+                        </li>
+                        <li>
+                            <a href="#">Settings</a>
+                        </li>
+                        <hr />
+                        <li>
+                            <a href="#" class="text-danger">Sign Out</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
 
     <hr class="m-0 bg-warning" style="" />
+
+    <div class="container py-2">
+        <form
+            action="{% url 'home' %}"
+            method="get"
+            class="d-flex m-0 search-bar mobile-search"
+            role="search"
+            style="width: 100%"
+        >
+            <div
+                class="input-group"
+                style="
+                    border: solid 1px var(--search-border);
+                    border-radius: 5px;
+                "
+            >
+                <input
+                    class="form-control my-0"
+                    type="search"
+                    name="q"
+                    placeholder="Looking for something?"
+                    aria-label="Search"
+                    style="
+                        background-color: var(--search-color);
+                        border-width: 0px;
+                    "
+                    aria-describedby="button-addon2"
+                />
+                <button
+                    class="btn btn-outline-secondary"
+                    type="submit"
+                    id="button-addon2"
+                    style="
+                        border-radius: 0px;
+                        border: 0px;
+                        border-left: 1px solid;
+                    "
+                >
+                    Search
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <script>
@@ -124,21 +305,45 @@
         const body = document.body;
         const toggleLabel = document.getElementById("toggle-label");
 
+        const menuIcon = document.querySelector(".menu-icon");
+        const navLinks = document.querySelector(".nav-links");
+
         // Check saved theme and apply
         if (localStorage.getItem("theme") === "dark") {
             body.classList.add("dark-mode");
-            toggleLabel.textContent = "Light Mode";
+            toggleLabel.textContent = "Light";
         }
 
         toggleSwitch.addEventListener("click", () => {
             if (body.classList.contains("dark-mode")) {
                 body.classList.remove("dark-mode");
                 localStorage.setItem("theme", "light");
-                toggleLabel.textContent = "Dark Mode";
+                toggleLabel.textContent = "Dark";
             } else {
                 body.classList.add("dark-mode");
                 localStorage.setItem("theme", "dark");
-                toggleLabel.textContent = "Light Mode";
+                toggleLabel.textContent = "Light";
+            }
+        });
+
+        menuIcon.addEventListener("click", function () {
+            if (navLinks.classList.contains("open")) {
+                navLinks.style.maxHeight = "0px";
+                navLinks.classList.remove("open");
+            } else {
+                navLinks.style.maxHeight = navLinks.scrollHeight + "px";
+                navLinks.classList.add("open");
+            }
+        });
+
+        // Optional: Close menu when clicking outside
+        document.addEventListener("click", function (event) {
+            if (
+                !menuIcon.contains(event.target) &&
+                !navLinks.contains(event.target)
+            ) {
+                navLinks.style.maxHeight = "0px";
+                navLinks.classList.remove("open");
             }
         });
     });
