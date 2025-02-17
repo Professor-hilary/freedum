@@ -55,7 +55,7 @@
                 <div class="container px-0">
                     {% if request.user.is_authenticated %}
                     <div class="d-flex flex-column">
-                        <p class="m-0">Hello {{ request.user }}</p>
+                        <p class="m-0">Hello {{ request.user.username }}</p>
                         <a href="{% url 'logout' %}" class="text-danger"
                             >(Logout)</a
                         >
