@@ -1,0 +1,125 @@
+{% extends "main.html" %} {% block content %} {% load static %}
+
+<style>
+    p {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .inner-container {
+        width: 100%;
+    }
+
+    /* Media Queries */
+    @media screen and (min-width: 768px) {
+        .inner-container {
+            width: 60%;
+        }
+    }
+</style>
+
+<div class="container my-4">
+    <div class="container inner-container">
+        <h5 class="my-2">Search Topics</h5>
+        <form
+            action="#"
+            method="GET"
+            class="d-flex m-0 mb-2"
+            role="search"
+            style="width: 100%"
+        >
+            <div
+                class="input-group"
+                style="
+                    border: solid 1px var(--search-border);
+                    border-radius: 5px;
+                "
+            >
+                <span
+                    class="input-group-text border-0"
+                    id="basic-addon1"
+                    style="background-color: transparent"
+                >
+                    <i class="fa fa-search" aria-hidden="true"></i
+                ></span>
+                <input
+                    class="form-control my-0"
+                    type="search"
+                    name="q"
+                    placeholder="Search a topic"
+                    aria-label="Search"
+                    style="
+                        background-color: var(--search-color);
+                        border-width: 0px;
+                        color: var(--text-color);
+                    "
+                    aria-describedby="button-addon2"
+                />
+            </div>
+        </form>
+
+        <div class="container d-flex flex-wrap p-0 m-0">
+            <button
+                class="d-flex btn btn-outline-primary px-3 py-1 m-1 "
+                style="
+                    gap: 10px;
+                    width: fit-content;
+                    border-radius: 20px;
+                "
+            >
+                <p>ALL</p>
+                <p>210</p>
+            </button>
+            <button
+                class="d-flex btn btn-outline-primary px-3 py-1 m-1 "
+                style="
+                    gap: 10px;
+                    border-radius: 20px;
+                    width: fit-content;
+                    
+                "
+            >
+                <p>Meta Programming</p>
+                <p>87</p>
+            </button>
+            <button
+                class="d-flex btn btn-outline-primary px-3 py-1 m-1 "
+                style="
+                    gap: 10px;
+                    border-radius: 20px;
+                    width: fit-content;
+                    
+                "
+            >
+                <p>C++</p>
+                <p>12</p>
+            </button>
+            <button
+                class="d-flex btn btn-outline-primary px-3 py-1 m-1 "
+                style="
+                    gap: 10px;
+                    border-radius: 20px;
+                    width: fit-content;
+                    
+                "
+            >
+                <p>JAVA</p>
+                <p>21</p>
+            </button>
+            <button
+                class="d-flex btn btn-outline-primary px-3 py-1 m-1 "
+                style="
+                    gap: 10px;
+                    border-radius: 20px;
+                    width: fit-content;
+                    
+                "
+            >
+                <p>Angula</p>
+                <p>90</p>
+            </button>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

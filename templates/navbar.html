@@ -46,7 +46,7 @@
         top: 60px;
         right: 0;
         padding: 0 !important;
-        width: 100%;
+        width: 150px;
         background: var(--bg-color);
         max-height: 0; /* Start as hidden */
         overflow: hidden; /* Prevent content from being visible */
@@ -83,6 +83,14 @@
         display: flex !important;
     }
 
+    .nav-links:focus {
+        background-color: var(--nav-bar);
+    }
+
+    .mobile-nav{
+        display: block;
+    }
+
     /* Media Queries */
     @media screen and (min-width: 768px) {
         .settings-toggle {
@@ -91,6 +99,10 @@
 
         .mobile-search {
             display: none !important;
+        }
+
+        .mobile-nav{
+            display: none;
         }
     }
 </style>
@@ -151,7 +163,9 @@
             </form>
             <div class="settings-toggle">
                 <label class="toggle-container mb-0">
-                    <span id="toggle-label">Dark</span>
+                    <span id="toggle-label" style="display: none !important"
+                        >Dark</span
+                    >
                     <div class="toggle-switch">
                         <div class="toggle-circle"></div>
                     </div>
@@ -184,30 +198,43 @@
                         border-radius: 50%;
                         overflow: hidden;
                         object-fit: contain;
+
                         border-color: var(--card-border-color) !important;
                     "
                 >
                     <img
                         src="{% static 'img/profile.png' %}"
                         alt=""
-                        style="width: 100% !important; height: 100% !important"
+                        style="width: 35px !important; height: 35px !important"
                         srcset=""
                         class=""
                     />
-
                 </div>
-                <div class="d-flex" style='justify-content: center; align-items: center;'>
-
-                {% if request.user.is_authenticated %}
-                    <p class="m-0 px-1">{{request.user}}</p>
-                {% else %}
-                    <p class="m-0 px-1">Guest</p>
-                {% endif %}
+                <div
+                    class="d-flex"
+                    style="justify-content: center; align-items: center"
+                >
+                    {% if request.user.is_authenticated %}
+                    <div class="d-flex flex-column">
+                        <p class="m-0 px-1" style="font-size: 0.7em">
+                            Last Name
+                        </p>
+                        <p class="m-0 px-1" style="font-size: 0.7em">
+                            @{{request.user}}
+                        </p>
+                    </div>
+                    {% else %}
+                    <p class="m-0 px-1" style="">Guest</p>
+                    {% endif %}
                 </div>
 
                 <div
                     class="container px-0 d-flex"
-                    style="display: flex; justify-content: center"
+                    style="
+                        display: flex;
+                        justify-content: end;
+                        width: fit-content;
+                    "
                 >
                     {% if request.user.is_authenticated %} {% comment %}
                     <div class="d-flex flex-column">
@@ -223,14 +250,15 @@
                     </div>
                     {% endcomment %} {% endif %}
                     <!-- Hamburger Icon -->
-                    <label for="menu-toggle" class="menu-icon">
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    <label for="menu-toggle" class="menu-icon pl-2">
+                        <i
+                            class="fa fa-chevron-circle-down"
+                            aria-hidden="true"
+                            style="font-size: 1.2em"
+                        ></i>
                     </label>
                     <!-- Nav Links -->
                     <ul class="nav-links" style="z-index: 1000">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/">Topics</a></li>
-                        <li><a href="/">Activities</a></li>
                         {% comment %}
                         <li>
                             Theme
@@ -243,10 +271,20 @@
                         </li>
                         {% endcomment %}
                         <li>
-                            <a href="#">Settings</a>
+                            <a
+                                href="{% url 'user-profile' request.user.id %}"
+                                class="author"
+                                >Profile</a
+                            >
                         </li>
                         <li>
-                            <a href="#" class="text-danger">Sign Out</a>
+                            {% if request.user.is_authenticated %}
+                            <a href="{% url 'logout' %}" class="text-danger"
+                                >Sign out</a
+                            >
+                            {% else %}
+                            <a href="{% url 'login' %}">(Login)</a>
+                            {% endif %}
                         </li>
                     </ul>
                 </div>
@@ -257,7 +295,7 @@
     <hr class="m-0 bg-warning" style="" />
 
     <div
-        class="container py-2"
+        class="container py-2 mobile-nav"
         style="background-color: transparent; z-index: 1000"
     >
         <form
@@ -274,6 +312,13 @@
                     border-radius: 5px;
                 "
             >
+                <span
+                    class="input-group-text border-0"
+                    id="basic-addon1"
+                    style="background-color: transparent"
+                >
+                    <i class="fa fa-search" aria-hidden="true"></i
+                ></span>
                 <input
                     class="form-control my-0"
                     type="search"
@@ -283,23 +328,31 @@
                     style="
                         background-color: var(--search-color);
                         border-width: 0px;
+                        color: var(--text-color);
                     "
                     aria-describedby="button-addon2"
                 />
-                <button
-                    class="btn btn-outline-secondary"
-                    type="submit"
-                    id="button-addon2"
-                    style="
-                        border-radius: 0px;
-                        border: 0px;
-                        border-left: 1px solid;
-                    "
-                >
-                    Search
-                </button>
             </div>
         </form>
+
+        <ul
+            class="nav nav-pills mt-2"
+            style="overflow-x: scroll; flex-wrap: nowrap"
+        >
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">Recent</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url "topics" %}">Topics</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Activities</a>
+            </li>
+        </ul>
     </div>
 </div>
 

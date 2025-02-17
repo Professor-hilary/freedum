@@ -3,11 +3,10 @@
 <style>
     .profile-container {
         display: grid;
-        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-columns: 3fr 1fr;
         gap: 20px; /* Optional spacing between columns */
     }
-    .home-container {
-    }
+    
 
     .home-container > div {
         overflow-y: auto;
@@ -33,19 +32,48 @@
         background-color: var(--bg-color) !important;
         border-color: var(--search-border) !important;
     }
+
+    .activities, .topics{
+        display: none !important;
+    }
+
+    .profile-container{
+        display: block;
+    }
+
+    .profile-info{
+        flex-direction: column !important;
+    }
+
+    /* Media Queries */
+    @media screen and (min-width: 768px) {
+        .profile-container{
+            display:grid
+        }
+
+        .activities, .topics{
+            display: flex !important;
+            flex-direction: column;
+        }
+
+        .profile-info{
+            flex-direction: row !important;
+        }
+    }
 </style>
 
-<div class="home-container container my-5">
+<div class="home-container container my-5" style="grid-template-columns: none;">
     <div class="profile-container">
-        <div>
+        {% comment %} <div class="topics">
             <div style="position: fixed">
                 <h1>{{user.username}}</h1>
                 {% include 'base/topics_component.html' %}
             </div>
-        </div>
-        <div>
+        </div> {% endcomment %}
+
+        <div class="feeds">
             <div class="mb-4">
-                <div class="d-flex pb-3">
+                <div class="d-flex pb-3 profile-info">
                     <div
                         class="profile-pic border mr-3"
                         style="width: 100px; height: 100px"
@@ -58,7 +86,7 @@
                     >
                         <h3 class="m-0 p-0">{{user.username}}'s activities</h3>
                         <p class="m-0 p-0">12 POST</p>
-                        <i class="m-0 p-0">Joined {{user.date_joined}}</i>
+                        <i class="m-0 p-0 date-joined">Joined {{user.date_joined}}</i>
                     </div>
                 </div>
 
@@ -104,7 +132,7 @@
                 </ul>
             </nav>
         </div>
-        <div>{% include 'base/activity_component.html' %}</div>
+        <div class="activities">{% include 'base/activity_component.html' %}</div>
     </div>
 </div>
 

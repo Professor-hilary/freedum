@@ -1,5 +1,6 @@
+/* Hide scrollbar Firefox */
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth;scrollbar-width: none !important;
 }
 
 body {
@@ -9,11 +10,6 @@ body {
 /* Hide scrollbar Chrome, Safari, Edge */
 ::-webkit-scrollbar {
     display: none !important;
-}
-
-/* Hide scrollbar Firefox */
-html {
-    scrollbar-width: none !important;
 }
 
 .nav-profile{

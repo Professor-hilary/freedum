@@ -89,11 +89,11 @@
     <div class="feed-item-body">
         <h5 class="feed-title">
             {% comment %} {{ room.id }} -- {% endcomment %}
-            <a href="{% url 'room' room.id %}" class="room-link"
+            <a href="{% url 'room' room.id %}" class="room-link" style="overflow-wrap: anywhere;"
                 >{{ room.name }}</a
             >
         </h5>
-        <p class="description">{{room.description}}</p>
+        <p class="description"  style="overflow-wrap: anywhere;">{{room.description}}</p>
         <small class="topic">{{ room.topic.name }}</small>
     </div>
 </div>
