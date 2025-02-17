@@ -185,15 +185,18 @@ def deleteMessage(request, pk):
 def updateUser(request):
     user = request.user
     form = UserForm(instance=user)
-    
+
     if request.method == 'POST':
         form = UserForm(request.POST, instance=user)
-        
+
         if form.is_valid():
             form.save()
             return redirect('user-profile', pk=user.id)
-    
-    return render(request, 'base/update_user.html', {'form': form}) 
+
+    return render(request, 'base/update_user.html', {'form': form})
+
 
 def topicsPage(request):
-    return render(request, 'base/topics.html',{}) 
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    topics = Topic.objects.filter(name__icontains=q)
+    return render(request, 'base/topics.html', {'topics': topics})

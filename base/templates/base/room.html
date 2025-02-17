@@ -2,28 +2,51 @@
 {% load icons %}
 <style>
     .room-container {
-        display: grid;
-        grid-template-columns: 3fr 1fr;
-        gap: 20px;
+        display: block
+    }
+
+    .participants{
+        display: none;
+    }
+
+    .user-mgt {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    @media screen and (min-width: 768px) {
+        .room-container {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 20px;
+        }
+
+        .participants{
+            display: block;
+        }
+
+        .user-mgt {
+            flex-direction: row;
+        }
     }
 </style>
 
 <div class="room-container container mt-5" style="position: relative">
-    <div style="padding: 20px">
-        <div class="mb-5 d-flex" style="justify-content: space-between">
+    <div style="padding: 0 10px">
+        <div class="mb-5 d-flex user-mgt" style="justify-content: space-between">
             <span>Authored by @{{ room.host.username }}</span>
             {% if request.user == room.host %}
             <div class="feed-actions m-0">
                 <a href="{% url 'update-room' room.id %}" class="edit"
-                    ><button class="btn btn-primary py-0" style="">
-                        Edit <i class="fa fa-edit" aria-hidden="true"></i>
+                    ><button class="btn btn-primary py-0 label" style="">
+                        <i class="fa fa-edit py-1" aria-hidden="true"></i>
                     </button></a
                 >
                 <a
                     href="{% url 'delete-room' room.id %}"
                     class="delete text-danger"
-                    ><button class="btn btn-danger py-0" style="">
-                        Delete <i class="fa fa-trash" aria-hidden="true"></i>
+                    ><button class="btn btn-danger py-0 label" style="">
+                        <i class="fa fa-trash py-1" aria-hidden="true"></i>
                     </button></a
                 >
             </div>
@@ -65,12 +88,14 @@
             </div>
             {% endif %} {% for message in room_messages %}
             <div class="pl-3 pt-2" style="background-color: var(--comment-box);border-left: 3px solid gray;">
-                {% if request.user == message.user %}
-                <a href="{% url 'delete-message' message.id %}">Delete</a>
-                {% endif %}
-                <small
+                <div class="d-flex justify-content-between align-items-center">
+                    <small
                     >@{{message.user}} {{message.created|timesince}} ago</small
-                >
+                    >
+                    {% if request.user == message.user %}
+                    <a href="{% url 'delete-message' message.id %}"><i class="fas fa-trash-alt text-danger pr-1" aria-hidden="true" style="font-size: .9em;"></i></a>
+                    {% endif %}
+                </div>
                 <p>{{message.body}}</p>
                 <hr />
             </div>
@@ -78,7 +103,7 @@
         </div>
     </div>
 
-    <div style="padding: 20px">
+    <div style="padding: 0 10px" class="participants">
         <h3>Participants</h3>
         <hr />
         {% for user in participants %}
