@@ -1,6 +1,19 @@
 {% extends "main.html" %} {% block content %}
-<div class="container w-50 mt-5" style="">
+<style>
+    .topic-form{
+        width: 100%;
+    }
+    /* Media Queries */
+    @media screen and (min-width: 768px) {
+        .topic-form{
+            width: 50%;
+        }
+    }
+</style>
+
+<div class="container mt-5 topic-form" style="">
     <form action="" method="POST">
+        <h3>New Topic</h3>
         {% csrf_token %} {% comment %} Form topic section {% endcomment %}
         <div class="form__group d-flex flex-column pb-2">
             <label for="room_topic">Room Topic</label>

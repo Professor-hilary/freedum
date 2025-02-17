@@ -46,7 +46,7 @@
         top: 60px;
         right: 0;
         padding: 0 !important;
-        width: 50%;
+        width: 100%;
         background: var(--bg-color);
         max-height: 0; /* Start as hidden */
         overflow: hidden; /* Prevent content from being visible */
@@ -54,9 +54,7 @@
     }
 
     .nav-links li {
-        display: flex;
-        justify-content: end;
-        align-items: center;
+        text-align: center;
         padding-right: 20px;
     }
 
@@ -162,7 +160,6 @@
                     class="p-3 d-flex"
                     style="justify-content: center; align-items: center"
                 >
-                    <span class="mb-0" style="font-weight: bold">Setting</span>
                     <a href="{% url 'update-user' %}" class=""
                         ><i
                             class="fa fa-cog pl-2"
@@ -197,6 +194,15 @@
                         srcset=""
                         class=""
                     />
+
+                </div>
+                <div class="d-flex" style='justify-content: center; align-items: center;'>
+
+                {% if request.user.is_authenticated %}
+                    <p class="m-0 px-1">{{request.user}}</p>
+                {% else %}
+                    <p class="m-0 px-1">Guest</p>
+                {% endif %}
                 </div>
 
                 <div
@@ -221,16 +227,11 @@
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </label>
                     <!-- Nav Links -->
-                    <ul class="nav-links">
-                        <li>
-                            <a href="/">Home</a>
-                        </li>
-                        <li>
-                            <a href="/">Topics</a>
-                        </li>
-                        <li>
-                            <a href="/">Activities</a>
-                        </li>
+                    <ul class="nav-links" style="z-index: 1000">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/">Topics</a></li>
+                        <li><a href="/">Activities</a></li>
+                        {% comment %}
                         <li>
                             Theme
                             <label class="toggle-container mb-0">
@@ -240,10 +241,10 @@
                                 </div>
                             </label>
                         </li>
+                        {% endcomment %}
                         <li>
                             <a href="#">Settings</a>
                         </li>
-                        <hr />
                         <li>
                             <a href="#" class="text-danger">Sign Out</a>
                         </li>
@@ -255,7 +256,10 @@
 
     <hr class="m-0 bg-warning" style="" />
 
-    <div class="container py-2">
+    <div
+        class="container py-2"
+        style="background-color: transparent; z-index: 1000"
+    >
         <form
             action="{% url 'home' %}"
             method="get"
