@@ -1,0 +1,49 @@
+{% extends "main.html" %} {% block content %} {% load static %}
+
+<div class="container">
+    <div class="container">
+        <h5 class="my-3">Recent Activities</h5>
+
+        <div class="container activities px-0">
+            {% for message in room_messages %}
+            
+            <div class="container activity border p-2 my-3" style="border-radius: 5px; border-color: var(--search-border) !important;">
+                <div class="d-flex" style="gap: 10px;">
+                    <div class="profile-pic border" style="width: 35px;height: 35px; border-radius: 50%;overflow: hidden; border-color: var(--search-border) !important;">
+                        <img
+                        src="{% static 'img/profile.png' %}"
+                        alt=""
+                        style="width: 100%;height: 100%;"
+                        srcset=""
+                        class=""
+                    />
+                    </div>
+                    <div class="d-flex flex-column justify-content-around" style="gap: 0;">
+                        <a class="m-0" style="line-height: 0" href="{% url 'user-profile' message.user.id %}">@{{message.user}}</a>
+                        <p class="m-0" style="line-height: 0; font-size: .6em">{{message.created|timesince}}</p>
+                    </div>
+                    {% if request.user == message.user %}
+                    <div style="flex: auto;align-self: self-start;">
+                        <div style="width: 100%;display: flex;justify-content: end;">
+                            <a href="{% url 'delete-message' message.id %}">
+                                <i class="fa fa-times btn btn-outline-danger" aria-hidden="true" style="text-align: end;"></i>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="container px-0 py-2">
+                    <p style="font-size: 0.7em;">replied to post "<span class="text-primary">{{message.room}}</span>"</p>
+                </div>
+
+                <div class="container px-2 py-1" style="background-color: var(--card-border-color); border-radius: 5px;">
+                    <p style="font-size: 0.8em;">{{message}}</p>
+                </div>
+            </div>
+            
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
