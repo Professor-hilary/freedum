@@ -1,5 +1,7 @@
 {% extends "main.html" %} {% block content %}
 {% load icons %}
+{% load static %}
+
 <style>
     .room-container {
         display: block
@@ -34,7 +36,30 @@
 <div class="room-container container mt-5" style="position: relative">
     <div style="padding: 0 10px">
         <div class="mb-5 d-flex user-mgt" style="justify-content: space-between">
-            <span>Authored by @{{ room.host.username }}</span>
+            <div class="d-flex" style="gap: 10px;align-items: end;">
+                <div
+                    class="border boder-1"
+                    style="
+                        border-radius: 50%;
+                        overflow: hidden;
+                        object-fit: contain;
+                        height: fit-content;
+                        border-color: var(--card-border-color) !important;
+                    "
+                >
+                    <img
+                        src="{{request.user.avatar.url}}"
+                        alt=""
+                        style="width: 35px !important; height: 35px !important"
+                        srcset=""
+                        class=""
+                    />
+                </div>
+                <div class="d-flex flex-column">
+                    <span style="font-size: .9em; font-weight: bold;">Authored by @{{ room.host.username }}</span>
+                    <p class="m-0 p-0" style="font-size: .7em; font-style: italic;">{{ room.created|timesince}}</p>
+                </div>
+            </div>
             {% if request.user == room.host %}
             <div class="feed-actions m-0">
                 <a href="{% url 'update-room' room.id %}" class="edit"
@@ -90,7 +115,7 @@
             <div class="pl-3 pt-2" style="background-color: var(--comment-box);border-left: 3px solid gray;">
                 <div class="d-flex justify-content-between align-items-center">
                     <small
-                    >@{{message.user}} {{message.created|timesince}} ago</small
+                    >@{{message.user.username}} {{message.created|timesince}} ago</small
                     >
                     {% if request.user == message.user %}
                     <a href="{% url 'delete-message' message.id %}"><i class="fas fa-trash-alt text-danger pr-1" aria-hidden="true" style="font-size: .9em;"></i></a>

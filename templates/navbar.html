@@ -203,7 +203,7 @@
                     "
                 >
                     <img
-                        src="{% static 'img/profile.png' %}"
+                        src="{{request.user.avatar.url}}"
                         alt=""
                         style="width: 35px !important; height: 35px !important"
                         srcset=""
