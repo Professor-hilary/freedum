@@ -65,13 +65,6 @@
 
 <div class="home-container container my-5">
     <div class="profile-container" style="width: 90vw !important;">
-        {% comment %} <div class="topics">
-            <div style="position: fixed">
-                <h1>{{user.username}}</h1>
-                {% include 'base/topics_component.html' %}
-            </div>
-        </div> {% endcomment %}
-
         <div class="feeds">
             <div class="mb-4">
                 <div class="d-flex pb-3 profile-info">
@@ -105,10 +98,11 @@
                 </div>
             </div>
 
-            <h5 class="my-4">{{user.username}}'s Rooms</h5>
-
+            <h5 class="my-4">{{user.username}}'s rooms</h5>
+            
             {% include 'base/feed_component.html' %}
-
+            
+            {% comment %} 
             <nav aria-label="Page navigation example" class="my-5">
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled">
@@ -127,7 +121,7 @@
                         <a class="page-link" href="#">Next</a>
                     </li>
                 </ul>
-            </nav>
+            </nav> {% endcomment %}
         </div>
         <div class="activities">{% include 'base/activity_component.html' %}</div>
     </div>

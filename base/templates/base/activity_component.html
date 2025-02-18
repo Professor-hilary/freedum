@@ -1,23 +1,29 @@
-<h3 class="fs-3" style="font-size: 1.2em;">Recent Activity</h3>
-<hr />
-{% for message in room_messages %}
-<div
-    class="mb-2 p-1"
-    style="
-        border-width: 1px;
-        border-style: solid;
-        border-color: var(--card-border-color);
-    "
->
-    <small class="">
-        {{message.created|timesince}}
-        <hr class="m-1 p-0">
-    </small>
-    <small>replied to "{{message.room}}"</small>
+<h3 class="fs-3 pb-2" style="font-size: 1.2em;">Recent Activity</h3>
+<hr class="m-0 p-0" style="background-color: var(--card-color) !important;">
+{% if room_messages %}
+    {% for message in room_messages %}
+        <div
+            class="mb-2 p-1"
+            style="
+                border-width: 1px;
+                border-style: solid;
+                border-color: var(--card-border-color);
+                "
+            >
+            <small class="">
+                {{message.created|timesince}}
+                <hr class="m-1 p-0">
+            </small>
+            <small>replied to "{{message.room}}"</small>
 
-    <p>{{message}}</p>
-    {% if request.user == message.user %}
-    <a href="{% url 'delete-message' message.id %}" class="text-danger"><i class="fa fa-trash-alt    "></i></a>
-    {% endif %}
-</div>
-{% endfor %}
+            <p>{{message}}</p>
+            {% if request.user == message.user %}
+            <a href="{% url 'delete-message' message.id %}" class="text-danger"><i class="fa fa-trash-alt"></i></a>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="container p-0">
+        <span style="font-style: italic;">No Activities From This User</span>
+    </div>
+{% endif %}
