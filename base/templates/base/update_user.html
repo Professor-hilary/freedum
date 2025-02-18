@@ -1,7 +1,10 @@
 {% extends "main.html" %} {% block content %}
 
 <style>
-    input{
+    .update-form{
+        width: 100% !important;
+    }
+    input, textarea{
         width: 100%;
         background-color: transparent;
         border: solid 1px var(--card-border-color);
@@ -10,25 +13,29 @@
         color: var(--text-color);
     }
 
-    
+    /* Media Queries */
+    @media screen and (min-width: 768px) {
+        .update-form{
+            width: 500px !important;
+        }
+    }
 </style>
 
-<div class="container mt-5" style="width: 40%">
+<div class="container mt-5 update-form">
     <h4>Edit Profile Information</h4>
+    <hr style="background-color: var(--card-border-color);">
 
-    <form action="" class="form" method="POST">
+    <form action="" class="form" method="POST" enctype="multipart/form-data">
         {% csrf_token %} {% for field in form %}
 
         <div class="d-flex flex-column form__group">
             <div class="mb-3">
-                {{field.label}}
-                {% comment %} <input
-                    type="{{field.type}}"
-                    class="form-control py-2 mt-2"
-                    id="{{field.label}}"
-                    style="background: transparent; width: 100%"
-                /> {% endcomment %}
+                <label for="" class="mb-2">
+                    {{field.label}}
+                </label>
+                
                 {{field}}
+                
             </div>
 
             {% endfor %}

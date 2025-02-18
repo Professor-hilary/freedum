@@ -176,11 +176,25 @@
                 >
                     <a href="{% url 'update-user' %}" class=""
                         ><i
-                            class="fa fa-cog pl-2"
+                            class="fa fa-cog p-0"
                             style="font-size: 20px"
                             aria-hidden="true"
                         ></i
                     ></a>
+                </div>
+                <div
+                    class="p-3 d-flex"
+                    style="justify-content: center; align-items: center"
+                >
+                    {% if request.user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="text-danger" style="font-size: larger;">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="text-danger" style="font-size: larger;">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -202,14 +216,25 @@
                         border-color: var(--card-border-color) !important;
                     "
                 >
-                    <img
-                        src="{{request.user.avatar.url}}"
-                        alt=""
-                        style="width: 35px !important; height: 35px !important"
-                        srcset=""
-                        class=""
+                {% if request.user.is_authenticated %}
+                <img
+                    src="{{request.user.avatar.url}}"
+                    alt=""
+                    style="width: 35px !important; height: 35px !important"
+                    srcset=""
+                    class=""
                     />
                 </div>
+                {% else %}
+                <img
+                    src="{% static 'img/profile.png' %}"
+                    alt=""
+                    style="width: 35px !important; height: 35px !important"
+                    srcset=""
+                    class=""
+                    />
+                </div>
+                {% endif %}
                 <div
                     class="d-flex"
                     style="justify-content: center; align-items: center"
@@ -236,40 +261,18 @@
                         width: fit-content;
                     "
                 >
-                    {% if request.user.is_authenticated %} {% comment %}
-                    <div class="d-flex flex-column">
-                        <p class="m-0">Hello {{ request.user }}</p>
-                        <a href="{% url 'logout' %}" class="text-danger"
-                            >(Logout)</a
-                        >
-                    </div>
-                    {% else %}
-                    <div class="d-flex flex-column">
-                        <p class="m-0">Hello Guest User</p>
-                        <a href="{% url 'login' %}">(Login)</a>
-                    </div>
-                    {% endcomment %} {% endif %}
-                    <!-- Hamburger Icon -->
-                    <label for="menu-toggle" class="menu-icon pl-2">
-                        <i
-                            class="fa fa-chevron-circle-down"
-                            aria-hidden="true"
-                            style="font-size: 1.2em"
-                        ></i>
-                    </label>
-                    <!-- Nav Links -->
-                    <ul class="nav-links" style="z-index: 1000">
-                        {% comment %}
-                        <li>
-                            Theme
-                            <label class="toggle-container mb-0">
-                                <span id="toggle-label">Dark</span>
-                                <div class="toggle-switch">
-                                    <div class="toggle-circle"></div>
-                                </div>
-                            </label>
-                        </li>
-                        {% endcomment %}
+                
+                <!-- Hamburger Icon -->
+                <label for="menu-toggle" class="menu-icon pl-2">
+                    <i
+                    class="fa fa-chevron-circle-down"
+                    aria-hidden="true"
+                    style="font-size: 1.2em"
+                    ></i>
+                </label>
+                <!-- Nav Links -->
+                <ul class="nav-links" style="z-index: 1000">
+                        {% if request.user.is_authenticated %}
                         <li>
                             <a
                                 href="{% url 'user-profile' request.user.id %}"
@@ -277,6 +280,7 @@
                                 >Profile</a
                             >
                         </li>
+                        {% endif %}
                         <li>
                             {% if request.user.is_authenticated %}
                             <a href="{% url 'logout' %}" class="text-danger"

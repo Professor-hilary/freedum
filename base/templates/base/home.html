@@ -25,54 +25,52 @@
         background-color: var(--bg-color) !important;
         border-color: var(--search-border) !important;
     }
-
-    
 </style>
 
 <div class="home-container container pt-4">
     {% comment %}Topics Section{% endcomment %}
     <div class="topic-column">
-        <div style="position: fixed" class="d-flex flex-column">
-            <div class="d-flex my-2" style="">
+        <div style="" class="d-flex flex-column">
+            <div class="d-flex my-2" style="width: 100%;">
                 <div
                     class="border boder-1 mr-2"
                     style="
-                        width: 70px;
+                        width: 20%;
                         object-fit: contain;
                         border-radius: 5%;
                         border-color: var(--search-border);
                     "
                 >
                     {% if request.user.is_authenticated %}
-                    <img
-                        src="{{request.user.avatar.url}}"
-                        alt="profile-pic"
-                        style="width: 100% !important"
-                        srcset=""
-                        class=""
-                    />
+                        <img
+                            src="{{request.user.avatar.url}}"
+                            alt="profile-pic"
+                            style="width: 100% !important; height: 100% !important"
+                            srcset=""
+                            class=""
+                        />
                     {% else %}
-                    <img
-                        src="{% static 'img/profile.png' %}"
-                        alt="profile-pic"
-                        style="width: 100% !important"
-                        srcset=""
-                        class=""
-                    />
+                        <img
+                            src="{% static 'img/profile.png' %}"
+                            alt="profile-pic"
+                            style="width: 100% !important"
+                            srcset=""
+                            class=""
+                        />
                     {% endif %}
                 </div>
 
-                <div class="container px-0">
+                <div class="container px-0" style="width: 70%;">
                     {% if request.user.is_authenticated %}
                     <div class="d-flex flex-column">
-                        <p class="m-0">Hello {{ request.user.username }}</p>
-                        <a href="{% url 'logout' %}" class="text-danger"
-                            >(Logout)</a
+                        <p class="m-0" style="width: 100%;overflow: scroll;">{{ request.user.name }}</p>
+                        <a href="{% url 'user-profile' request.user.id %}" class="text-danger" style="font-style: italic; font-size: .8em;"
+                            >@{{ request.user.username }}</a
                         >
                     </div>
                     {% else %}
                     <div class="d-flex flex-column">
-                        <p class="m-0">Hello Guest User</p>
+                        <p class="m-0">Guest User</p>
                         <a href="{% url 'login' %}">(Login)</a>
                     </div>
 
@@ -117,9 +115,9 @@
     </div>
 
     {% comment %}Recent Activities Section{% endcomment %}
-    <div class="activities-column">
+    {% comment %} <div class="activities-column">
         {% include "base/activity_component.html" %}
-    </div>
+    </div> {% endcomment %}
 </div>
 
 {% endblock content %}

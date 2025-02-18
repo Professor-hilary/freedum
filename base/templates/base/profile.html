@@ -7,7 +7,6 @@
         gap: 20px; /* Optional spacing between columns */
     }
     
-
     .home-container > div {
         overflow-y: auto;
         max-height: 100%; /* Ensures it takes full height of .home-container */
@@ -47,8 +46,10 @@
 
     /* Media Queries */
     @media screen and (min-width: 768px) {
-        .profile-container{
-            display:grid
+        .profile-container {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 20px; /* Optional spacing between columns */
         }
 
         .activities, .topics{
@@ -62,8 +63,8 @@
     }
 </style>
 
-<div class="home-container container my-5" style="grid-template-columns: none;">
-    <div class="profile-container">
+<div class="home-container container my-5">
+    <div class="profile-container" style="width: 90vw !important;">
         {% comment %} <div class="topics">
             <div style="position: fixed">
                 <h1>{{user.username}}</h1>
@@ -99,11 +100,7 @@
                 <div>
                     <h5>ABOUT</h5>
                     <p class="about">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Earum accusantium delectus, quaerat dolores magnam
-                        ipsam! Ea minus quisquam repellendus veritatis, illum
-                        dignissimos libero doloribus, rem, eos eligendi
-                        asperiores a architecto.
+                        {{user.bio}}
                     </p>
                 </div>
             </div>

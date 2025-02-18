@@ -52,13 +52,14 @@ body {
     .settings-toggle{
         display: flex;
     }
-}
 
-@media screen and (min-width: 1024px) {
     .home-container {
         display: grid;
-        grid-template-columns: 1fr 3fr 1fr;
-        gap: 20px; /* Optional spacing between columns */
+        grid-template-columns: 1fr 3fr !important;
+    }
+
+    .topic-col-title{
+        font-size: 1.2em;
     }
 
     .home-container .topic-column,
@@ -66,7 +67,10 @@ body {
         display: flex !important;
         flex-direction: column;
     }
-    .nav-profile{        
+}
+
+@media screen and (min-width: 1024px) {    
+    .nav-profile{
         display: none !important;
     }
 }

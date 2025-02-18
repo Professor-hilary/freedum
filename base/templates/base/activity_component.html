@@ -1,4 +1,4 @@
-<h3 class="fs-3">Recent Activity</h3>
+<h3 class="fs-3" style="font-size: 1.2em;">Recent Activity</h3>
 <hr />
 {% for message in room_messages %}
 <div
@@ -9,15 +9,15 @@
         border-color: var(--card-border-color);
     "
 >
-    <small class="border-bottom">
-        <a href="{% url 'user-profile' message.user.id %}">@{{message.user}}</a>
+    <small class="">
         {{message.created|timesince}}
+        <hr class="m-1 p-0">
     </small>
     <small>replied to "{{message.room}}"</small>
 
     <p>{{message}}</p>
     {% if request.user == message.user %}
-    <a href="{% url 'delete-message' message.id %}">Delete</a>
+    <a href="{% url 'delete-message' message.id %}" class="text-danger"><i class="fa fa-trash-alt    "></i></a>
     {% endif %}
 </div>
 {% endfor %}

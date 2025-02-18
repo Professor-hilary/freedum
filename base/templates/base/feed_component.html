@@ -100,10 +100,6 @@
             </div>
         </div>
         {% if request.user == room.host %}
-        {% comment %} <div class="feed-actions m-0">
-            <a href="{% url 'update-room' room.id %}" class="edit">Edit</a>
-            <a href="{% url 'delete-room' room.id %}" class="delete">Delete</a>
-        </div> {% endcomment %}
         {% endif %}
     </div>
 
