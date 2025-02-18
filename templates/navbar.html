@@ -166,10 +166,14 @@
               <p class="m-0 px-1" style="font-size: 0.7em">@{{ request.user.username }}</p>
             </div>
           {% else %}
-            <p class="m-0 px-1" style="">Guest</p>
+            <div class="d-flex flex-column">
+              <p class="m-0 px-1" style="font-size: 0.7em">Guest</p>
+              <a class="m-0 px-1" style="font-size: 0.7em" href="{% url "login" %}">Login</a>
+            </div>
           {% endif %}
         </div>
 
+        {% if request.user.is_authenticated %}
         <div class="container px-0 d-flex" style="
                         display: flex;
                         justify-content: end;
@@ -193,6 +197,7 @@
             </li>
           </ul>
         </div>
+        {% endif %}
       </div>
     </div>
   </nav>

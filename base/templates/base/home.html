@@ -1,104 +1,81 @@
-{% extends "main.html" %} {% block content %} {% load static %}
+{% extends 'main.html' %} {% block content %}
+  {% load static %}
 
-<style>
+  <style>
     .home-container > div {
-        overflow-y: auto;
-        max-height: 100%;
-        padding: 10px;
+      overflow-y: auto;
+      max-height: 100%;
+      padding: 10px;
     }
-
+    
     .home-container > div::-webkit-scrollbar {
-        width: 8px;
+      width: 8px;
     }
-
+    
     .home-container > div::-webkit-scrollbar-thumb {
-        background-color: #888;
-        border-radius: 4px;
+      background-color: #888;
+      border-radius: 4px;
     }
-
+    
     .home-container > div::-webkit-scrollbar-thumb:hover {
-        background-color: #555;
+      background-color: #555;
     }
-
+    
     .pagination > li > a {
-        background-color: var(--bg-color) !important;
-        border-color: var(--search-border) !important;
+      background-color: var(--bg-color) !important;
+      border-color: var(--search-border) !important;
     }
-</style>
+  </style>
 
-<div class="home-container container pt-4">
+  <div class="home-container container pt-4">
     {% comment %}Topics Section{% endcomment %}
     <div class="topic-column">
-        <div style="" class="d-flex flex-column">
-            <div class="d-flex my-2" style="width: 100%;">
-                <div
-                    class="border boder-1 mr-2"
-                    style="
+      <div style="" class="d-flex flex-column">
+        <div class="d-flex my-2" style="width: 100%;">
+          <div class="border boder-1 mr-2" style="
                         width: 45px;
                         height: 45px;
                         object-fit: contain;
                         border-radius: 5%;
                         border-color: var(--search-border);
-                    "
-                >
-                    {% if request.user.is_authenticated %}
-                        <img
-                            src="{{request.user.avatar.url}}"
-                            alt="profile-pic"
-                            style="width: 100% !important; height: 100% !important"
-                            srcset=""
-                            class=""
-                        />
-                    {% else %}
-                        <img
-                            src="{% static 'img/profile.png' %}"
-                            alt="profile-pic"
-                            style="width: 100% !important"
-                            srcset=""
-                            class=""
-                        />
-                    {% endif %}
-                </div>
+                    ">
+            {% if request.user.is_authenticated %}
+              <img src="{{ request.user.avatar.url }}" alt="profile-pic" style="width: 100% !important; height: 100% !important" srcset="" class="" />
+            {% else %}
+              <img src="{% static 'img/profile.png' %}" alt="profile-pic" style="width: 100% !important" srcset="" class="" />
+            {% endif %}
+          </div>
 
-                <div class="container px-0" style="width: 70%;">
-                    {% if request.user.is_authenticated %}
-                    <div class="d-flex flex-column">
-                        <p class="m-0" style="width: 100%;overflow: scroll;">{{ request.user.name }}</p>
-                        <a href="{% url 'user-profile' request.user.id %}" class="text-danger" style="font-style: italic; font-size: .8em;"
-                            >@{{ request.user.username }}</a
-                        >
-                    </div>
-                    {% else %}
-                    <div class="d-flex flex-column">
-                        <p class="m-0">Guest User</p>
-                        <a href="{% url 'login' %}">(Login)</a>
-                    </div>
-
-                    {% endif %}
-                </div>
-            </div>
-            <div class="bg-warning my-2" style="width: 100%; height: 1px"></div>
-
-            {% include "base/topics_component.html" %}
+          <div class="container px-0" style="width: 70%;">
+            {% if request.user.is_authenticated %}
+              <div class="d-flex flex-column">
+                <p class="m-0" style="width: 100%;overflow: scroll;">{{ request.user.name }}</p>
+                <a href="{% url 'user-profile' request.user.id %}" class="text-danger" style="font-style: italic; font-size: .8em;">@{{ request.user.username }}</a>
+              </div>
+            {% else %}
+              <div class="d-flex flex-column">
+                <p class="m-0">Guest User</p>
+                <a href="{% url 'login' %}">(Login)</a>
+              </div>
+            {% endif %}
+          </div>
         </div>
+        <div class="bg-warning my-2" style="width: 100%; height: 1px"></div>
+
+        {% include 'base/topics_component.html' %}
+      </div>
     </div>
 
     {% comment %}Rooms Section{% endcomment %}
     <div class="rooms-column">
-        <div
-            class="d-flex mb-1"
-            style="justify-content: space-between; align-items: center"
-        >
-            <h3>Rooms</h3>
+      <div class="d-flex mb-1" style="justify-content: space-between; align-items: center">
+        <h3>Rooms</h3>
 
-            <a href="{% url 'create-room' %}"
-                ><button class="btn btn-primary">Create Room</button></a
-            >
-        </div>
-        <p class="mb-4">{{room_count}} rooms available</p>
+        <a href="{% url 'create-room' %}"><button class="btn btn-primary">Create Room</button></a>
+      </div>
+      <p class="mb-4">{{ room_count }} rooms available</p>
 
-        {% include "base/feed_component.html" %}
+      {% include 'base/feed_component.html' %}
     </div>
-</div>
-
-{% endblock content %}
+  </div>
+{% endblock %}
