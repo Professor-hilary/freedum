@@ -71,6 +71,6 @@ body {
 
 @media screen and (min-width: 1024px) {    
     .nav-profile{
-        display: none !important;
+        display: flex !important;
     }
 }

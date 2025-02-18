@@ -1,289 +1,257 @@
 {% load static %}
-
-<style>
-  .container-fluid {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-  
-  li {
-    list-style-type: none;
-  }
-  
-  .parent {
-    position: sticky;
-    z-index: 1000;
-    top: 0px;
-    background-color: var(--nav-bar);
-  }
-  /* Navbar Container */
-  
-  /* Menu Button (Hamburger) */
-  .menu-toggle {
-    display: none;
-  }
-  
-  .menu-icon {
-    display: block;
-    cursor: pointer;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .menu-icon div {
-    width: 100%;
-    height: 4px;
-    background: white;
-    margin: 5px 0;
-    transition: 0.3s;
-    z-index: 1000;
-  }
-  
-  /* Menu */
-  .nav-links {
-    list-style: none;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    padding: 0 !important;
-    width: 150px;
-    background: var(--bg-color);
-    max-height: 0; /* Start as hidden */
-    overflow: hidden; /* Prevent content from being visible */
-    transition: max-height 0.3s ease-in-out;
-  }
-  
-  .nav-links li {
-    text-align: center;
-    padding-right: 20px;
-  }
-  
-  .nav-links a {
-    text-decoration: none;
-    color: var(--text-color);
-    padding: 12px 20px;
-    display: block;
-    text-align: center !important;
-    transition: background 0.3s;
-  }
-  
-  .nav-links.open {
-    max-height: 300px; /* Adjust based on content size */
-  }
-  
-  .nav-links a:hover {
-    background: #444;
-  }
-  
-  .settings-toggle {
-    display: none !important;
-  }
-  
-  .mobile-search {
-    display: flex !important;
-  }
-  
-  .nav-links:focus {
-    background-color: var(--nav-bar);
-  }
-  
-  .mobile-nav {
-    display: block;
-  }
-  
-  /* Media Queries */
-  @media screen and (min-width: 768px) {
-    .settings-toggle {
-      display: flex !important;
+{% block content %}
+  <style>
+    .container-fluid {
+      padding-left: 0px;
+      padding-right: 0px;
     }
-  
-    .mobile-search {
-      display: none !important;
+    
+    li {
+      list-style-type: none;
     }
-  
-    .mobile-nav {
+    
+    .parent {
+      position: sticky;
+      z-index: 1000;
+      top: 0px;
+      background-color: var(--nav-bar);
+    }
+    /* Navbar Container */
+    
+    /* Menu Button (Hamburger) */
+    .menu-toggle {
       display: none;
     }
-  }
-</style>
+    
+    .menu-icon {
+      display: block;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .menu-icon div {
+      width: 100%;
+      height: 4px;
+      background: white;
+      margin: 5px 0;
+      transition: 0.3s;
+      z-index: 1000;
+    }
+    
+    /* Menu */
+    .nav-links {
+      list-style: none;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      padding: 0 !important;
+      width: 150px;
+      background: var(--bg-color);
+      max-height: 0; /* Start as hidden */
+      overflow: hidden; /* Prevent content from being visible */
+      transition: max-height 0.3s ease-in-out;
+    }
+    
+    .nav-links li {
+      text-align: center;
+      padding-right: 20px;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-color);
+      padding: 12px 20px;
+      display: block;
+      text-align: center !important;
+      transition: background 0.3s;
+    }
+    
+    .nav-links.open {
+      max-height: 300px; /* Adjust based on content size */
+    }
+    
+    .nav-links a:hover {
+      background: #444;
+    }
+    
+    .settings-toggle {
+      display: none !important;
+    }
+    
+    .mobile-search {
+      display: flex !important;
+    }
+    
+    .nav-links:focus {
+      background-color: var(--nav-bar);
+    }
+    
+    .mobile-nav {
+      display: block;
+    }
+    
+    /* Media Queries */
+    @media screen and (min-width: 768px) {
+      .settings-toggle {
+        display: flex !important;
+      }
+    
+      .mobile-search {
+        display: none !important;
+      }
+    
+      .mobile-nav {
+        display: none;
+      }
+    }
+  </style>
 
-<div class="parent" style="position: sticky">
-  <nav class="bg-body-tertiary container">
-    <div class="container-fluid d-flex my-0" style="justify-content: space-between; align-items: center">
-      <a class="my-2" href="/"><img src="{% static 'img/freedumsvg.svg' %}" style="height: 40px" alt="logo" srcset="" /></a>
+  <div class="parent" style="position: sticky">
+    <nav class="bg-body-tertiary container">
+      <div class="container-fluid d-flex my-0" style="justify-content: space-between; align-items: center">
+        <a class="my-2" href="/"><img src="{% static 'img/freedumsvg.svg' %}" style="height: 40px" alt="logo" srcset="" /></a>
 
-      <form action="{% url 'home' %}" method="get" class="d-flex m-0 search-bar" role="search" style="width: 40%">
-        <div class="input-group" style="
+        <form action="{% url 'home' %}" method="get" class="d-flex m-0 search-bar" role="search" style="width: 40%">
+          <div class="input-group" style="
                         border: solid 1px var(--search-border);
                         border-radius: 5px;
                     ">
-          <input class="form-control my-0" type="search" name="q" placeholder="Looking for something?" aria-label="Search" style="
+            <input class="form-control my-0" type="search" name="q" placeholder="Looking for something?" aria-label="Search" style="
                             background-color: var(--search-color);
                             border-width: 0px;
                         " aria-describedby="button-addon2" />
-          <button class="btn btn-outline-secondary" type="submit" id="button-addon2" style="
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2" style="
                             border-radius: 0px;
                             border: 0px;
                             border-left: 1px solid;
                         ">Search</button>
-        </div>
-      </form>
-      <div class="settings-toggle">
-        <label class="toggle-container mb-0">
-          <span id="toggle-label" style="display: none !important">Dark</span>
-          <div class="toggle-switch">
-            <div class="toggle-circle"></div>
           </div>
-        </label>
-        <div class="p-3 d-flex" style="justify-content: center; align-items: center">
-          <a href="{% url 'update-user' %}" class=""><i class="fa fa-cog p-0" style="font-size: 20px" aria-hidden="true"></i></a>
-        </div>
-        <div class="p-3 d-flex" style="justify-content: center; align-items: center">
-          {% if request.user.is_authenticated %}
-            <a href="{% url 'logout' %}" class="text-danger" style="font-size: larger;"><i class="fas fa-sign-out-alt"></i></a>
-          {% else %}
-            <a href="{% url 'login' %}" class="text-danger" style="font-size: larger;"><i class="fas fa-sign-in-alt"></i></a>
-          {% endif %}
-        </div>
-      </div>
+        </form>
+        {% comment %} <div class="settings-toggle">
+          <div class="p-3 d-flex" style="justify-content: center; align-items: center">
+            <a href="{% url 'update-user' %}" class=""><i class="fa fa-cog p-0" style="font-size: 20px" aria-hidden="true"></i></a>
+          </div>
+          <div class="p-3 d-flex" style="justify-content: center; align-items: center">
+            {% if request.user.is_authenticated %}
+              <a href="{% url 'logout' %}" class="text-danger" style="font-size: larger;"><i class="fas fa-sign-out-alt"></i></a>
+            {% else %}
+              <a href="{% url 'login' %}" class="text-danger" style="font-size: larger;"><i class="fas fa-sign-in-alt"></i></a>
+            {% endif %}
+          </div>
+        </div> {% endcomment %}
 
-      <div class="d-flex my-2 nav-profile" style="
+        <div class="d-flex my-2 nav-profile" style="
                     flex-direction: row;
                     justify-content: center;
                     align-items: center;
                 ">
-        <div class="border boder-1" style="border-radius: 50%;overflow: hidden;object-fit: contain;border-color: var(--card-border-color) !important;">
-          {% if request.user.is_authenticated %}
-            <img src="{{ request.user.avatar.url }}" alt="" style="width: 35px !important; height: 35px !important" srcset="" class="" />
-          {% else %}
-            <img src="{% static 'img/profile.png' %}" alt="" style="width: 35px !important; height: 35px !important" srcset="" class="" />
-          {% endif %}
-        </div>
-        <div class="d-flex" style="justify-content: center; align-items: center">
-          {% if request.user.is_authenticated %}
-            <div class="d-flex flex-column">
-              <p class="m-0 px-1" style="font-size: 0.7em">Last Name</p>
-              <p class="m-0 px-1" style="font-size: 0.7em">@{{ request.user.username }}</p>
-            </div>
-          {% else %}
-            <div class="d-flex flex-column">
-              <p class="m-0 px-1" style="font-size: 0.7em">Guest</p>
-              <a class="m-0 px-1" style="font-size: 0.7em" href="{% url "login" %}">Login</a>
-            </div>
-          {% endif %}
-        </div>
+          <div class="border boder-1" style="border-radius: 50%;overflow: hidden;object-fit: contain;border-color: var(--card-border-color) !important;">
+            {% if request.user.is_authenticated %}
+              <img src="{{ request.user.avatar.url }}" alt="" style="width: 35px !important; height: 35px !important" srcset="" class="" />
+            {% else %}
+              <img src="{% static 'img/profile.png' %}" alt="" style="width: 35px !important; height: 35px !important" srcset="" class="" />
+            {% endif %}
+          </div>
+          <div class="d-flex" style="justify-content: center; align-items: center">
+            {% if request.user.is_authenticated %}
+              <div class="d-flex flex-column">
+                <p class="m-0 px-1" style="font-size: 0.7em">Last Name</p>
+                <p class="m-0 px-1" style="font-size: 0.7em">@{{ request.user.username }}</p>
+              </div>
+            {% else %}
+              <div class="d-flex flex-column">
+                <p class="m-0 px-1" style="font-size: 0.7em">Guest</p>
+                <a class="m-0 px-1" style="font-size: 0.7em" href="{% url 'login' %}">Login</a>
+              </div>
+            {% endif %}
+          </div>
 
-        {% if request.user.is_authenticated %}
-        <div class="container px-0 d-flex" style="
+          {% if request.user.is_authenticated %}
+            <div class="container px-0 d-flex" style="
                         display: flex;
                         justify-content: end;
                         width: fit-content;
                     ">
-          <!-- Hamburger Icon -->
-          <label for="menu-toggle" class="menu-icon pl-2"><i class="fa fa-chevron-circle-down" aria-hidden="true" style="font-size: 1.2em"></i></label>
-          <!-- Nav Links -->
-          <ul class="nav-links" style="z-index: 1000">
-            {% if request.user.is_authenticated %}
-              <li>
-                <a href="{% url 'user-profile' request.user.id %}" class="author">Profile</a>
-              </li>
-            {% endif %}
-            <li>
-              {% if request.user.is_authenticated %}
-                <a href="{% url 'logout' %}" class="text-danger">Sign out</a>
-              {% else %}
-                <a href="{% url 'login' %}">(Login)</a>
-              {% endif %}
-            </li>
-          </ul>
+              <!-- Hamburger Icon -->
+              <label for="menu-toggle" class="menu-icon pl-2"><i class="fa fa-chevron-circle-down" aria-hidden="true" style="font-size: 1.2em"></i></label>
+              <!-- Nav Links -->
+              <ul class="nav-links" style="z-index: 1000">
+                {% if request.user.is_authenticated %}
+                  <li>
+                    <a href="{% url 'user-profile' request.user.id %}" class="author">Profile</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'update-user' %}" class="">Settings</a>
+                  </li>
+                {% endif %}
+                <li>
+                  {% if request.user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="text-danger">Sign out</a>
+                  {% else %}
+                    <a href="{% url 'login' %}">(Login)</a>
+                  {% endif %}
+                </li>
+              </ul>
+            </div>
+          {% endif %}
         </div>
-        {% endif %}
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <hr class="m-0 bg-warning" style="" />
+    <hr class="m-0 bg-warning" style="" />
 
-  <div class="container py-2 mobile-nav" style="background-color: transparent; z-index: 1000">
-    <form action="{% url 'home' %}" method="get" class="d-flex m-0 search-bar mobile-search" role="search" style="width: 100%">
-      <div class="input-group" style="
+    <div class="container py-2 mobile-nav" style="background-color: transparent; z-index: 1000">
+      <form action="{% url 'home' %}" method="get" class="d-flex m-0 search-bar mobile-search" role="search" style="width: 100%">
+        <div class="input-group" style="
                     border: solid 1px var(--search-border);
                     border-radius: 5px;
                 ">
-        <span class="input-group-text border-0" id="basic-addon1" style="background-color: transparent"><i class="fa fa-search" aria-hidden="true"></i></span>
-        <input class="form-control my-0" type="search" name="q" placeholder="Looking for something?" aria-label="Search" style="
+          <span class="input-group-text border-0" id="basic-addon1" style="background-color: transparent"><i class="fa fa-search" aria-hidden="true"></i></span>
+          <input class="form-control my-0" type="search" name="q" placeholder="Looking for something?" aria-label="Search" style="
                         background-color: var(--search-color);
                         border-width: 0px;
                         color: var(--text-color);
                     " aria-describedby="button-addon2" />
-      </div>
-    </form>
+        </div>
+      </form>
 
-    <ul class="nav nav-pills mt-2" style="justify-content: space-between;">
-      <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="/">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'topics' %}">Topics</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'activities' %}">Activities</a>
-      </li>
-      {% comment %} <li class="nav-item">
-          <label class="toggle-container mb-0">
-            <span id="toggle-label" style="display: none !important">Dark</span>
-            <div class="toggle-switch">
-              <div class="toggle-circle"></div>
-            </div>
-          </label>
-      </li> {% endcomment %}
-    </ul>
+      <ul class="nav nav-pills mt-2" style="justify-content: space-between;">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'topics' %}">Topics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'activities' %}">Activities</a>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const toggleSwitch = document.querySelector('.toggle-switch')
-    const body = document.body
-    const toggleLabel = document.getElementById('toggle-label')
-  
-    const menuIcon = document.querySelector('.menu-icon')
-    const navLinks = document.querySelector('.nav-links')
-  
-    // Check saved theme and apply
-    if (localStorage.getItem('theme') === 'dark') {
-      body.classList.add('dark-mode')
-      toggleLabel.textContent = 'Light'
-    }
-  
-    toggleSwitch.addEventListener('click', () => {
-      if (body.classList.contains('dark-mode')) {
-        body.classList.remove('dark-mode')
-        localStorage.setItem('theme', 'light')
-        toggleLabel.textContent = 'Dark'
-      } else {
-        body.classList.add('dark-mode')
-        localStorage.setItem('theme', 'dark')
-        toggleLabel.textContent = 'Light'
-      }
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuIcon = document.querySelector('.menu-icon')
+      const navLinks = document.querySelector('.nav-links')
+    
+      menuIcon.addEventListener('click', function () {
+        if (navLinks.classList.contains('open')) {
+          navLinks.style.maxHeight = '0px'
+          navLinks.classList.remove('open')
+        } else {
+          navLinks.style.maxHeight = navLinks.scrollHeight + 'px'
+          navLinks.classList.add('open')
+        }
+      })
+    
+      // Optional: Close menu when clicking outside
+      document.addEventListener('click', function (event) {
+        if (!menuIcon.contains(event.target) && !navLinks.contains(event.target)) {
+          navLinks.style.maxHeight = '0px'
+          navLinks.classList.remove('open')
+        }
+      })
     })
-  
-    menuIcon.addEventListener('click', function () {
-      if (navLinks.classList.contains('open')) {
-        navLinks.style.maxHeight = '0px'
-        navLinks.classList.remove('open')
-      } else {
-        navLinks.style.maxHeight = navLinks.scrollHeight + 'px'
-        navLinks.classList.add('open')
-      }
-    })
-  
-    // Optional: Close menu when clicking outside
-    document.addEventListener('click', function (event) {
-      if (!menuIcon.contains(event.target) && !navLinks.contains(event.target)) {
-        navLinks.style.maxHeight = '0px'
-        navLinks.classList.remove('open')
-      }
-    })
-  })
-</script>
+  </script>
+{% endblock %}

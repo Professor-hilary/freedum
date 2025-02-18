@@ -26,7 +26,8 @@
     <hr style="background-color: var(--card-border-color);">
 
     <form action="" class="form" method="POST" enctype="multipart/form-data">
-        {% csrf_token %} {% for field in form %}
+        {% csrf_token %}
+        {% for field in form %}
 
         <div class="d-flex flex-column form__group">
             <div class="mb-3">
@@ -39,18 +40,31 @@
             </div>
 
             {% endfor %}
+            
+            <div class="container d-flex px-0 my-2 justify-content-between align-items-center">
+                <span class="toggle-container mb-0">Change Theme</span>
+                
+                <div class="toggle-container mb-0">
+                    <span id="toggle-label" style="display: block !important">Dark</span>
+                    <div class="toggle-switch">
+                        <div class="toggle-circle"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="d-flex form__action">
-            <button class="btn btn-primary my-3 px-4 mr-4 btn--main" type="submit">
+        <div class="d-flex flex-column form__action">
+            <button class="btn btn-primary my-3 px-4 btn--main" type="submit">
                 Save Changes
             </button>
-            <a href="{{request.META.HTTP_REFERER}}" class="text-white">
-                <button class="btn btn-secondary my-3 px-4" type="button">
-                    Go Back
-                </button>
-            </a>
+            <a href="{{request.META.HTTP_REFERER}}" class="py-2 text-danger">Go Back</a>
         </div>
     </form>
+
 </div>
+
+
+<script>
+    
+  </script>
 
 {% endblock content %}
