@@ -101,27 +101,6 @@
             <h5 class="my-4">{{user.username}}'s rooms</h5>
             
             {% include 'base/feed_component.html' %}
-            
-            {% comment %} 
-            <nav aria-label="Page navigation example" class="my-5">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link">Previous</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav> {% endcomment %}
         </div>
         <div class="activities">{% include 'base/activity_component.html' %}</div>
     </div>

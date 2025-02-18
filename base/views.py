@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from .models import Room, Topic, Message, User
+from django.core.paginator import Paginator
 from .forms import RoomForm, UserForm, NewUserCreationForm
 
 
@@ -58,19 +59,29 @@ def registerPage(request):
 
 
 def home(request):
-    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    q = request.GET.get('q') if request.GET.get('q') is not None else ''
 
     rooms = Room.objects.filter(
         Q(topic__name__icontains=q) |
         Q(name__icontains=q) |
         Q(description__icontains=q)
-    )
-    topics = Topic.objects.all()[0:10]
+    ).order_by('-created')  # Sort by latest created rooms (optional)
+
+    # Pagination: Show 5 rooms per page
+    paginator = Paginator(rooms, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    topics = Topic.objects.all()[:5]  # Limit topics
     room_count = rooms.count()
-    room_messages = Message.objects.filter(Q(room__topic__name__icontains=q))
+
+    # Get the most recent messages related to the query (limit for efficiency)
+    room_messages = Message.objects.filter(
+        Q(room__topic__name__icontains=q)
+    ).order_by('-created')[:10]  # Limit to 10 messages
 
     context = {
-        'rooms': rooms,
+        'rooms': page_obj,  # Use paginated rooms
         'topics': topics,
         'room_count': room_count,
         'room_messages': room_messages,
@@ -200,6 +211,7 @@ def topicsPage(request):
     topics = Topic.objects.filter(name__icontains=q)
     return render(request, 'base/topics.html', {'topics': topics})
 
+
 def activitiesPage(request):
     room_messages = Message.objects.all()
-    return render(request, 'base/activity.html', {'room_messages':room_messages})
+    return render(request, 'base/activity.html', {'room_messages': room_messages})

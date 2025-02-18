@@ -1,7 +1,20 @@
 {% extends "main.html" %} {% block content %} {% load static %}
 
+<style>
+    .inner-container{
+        width: 100%;
+    }
+ 
+  /* Media Queries */
+  @media screen and (min-width: 768px) {
+    .inner-container{
+        width: 500px;
+    }
+  }
+</style>
+
 <div class="container">
-    <div class="container">
+    <div class="container inner-container">
         <h5 class="my-3">Recent Activities</h5>
 
         <div class="container activities px-0">
@@ -19,7 +32,7 @@
                     />
                     </div>
                     <div class="d-flex flex-column justify-content-around" style="gap: 0;">
-                        <a class="m-0" style="line-height: 0" href="{% url 'user-profile' message.user.id %}">@{{message.user}}</a>
+                        <a class="m-0" style="line-height: 0" href="{% url 'user-profile' message.user.id %}">@{{message.user.username}}</a>
                         <p class="m-0" style="line-height: 0; font-size: .6em">{{message.created|timesince}}</p>
                     </div>
                     {% if request.user == message.user %}
