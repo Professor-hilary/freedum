@@ -6,7 +6,9 @@
         margin: 0px !important;
         height: 100% !important;
       }
-      
+      label{
+        color: var(--text-color);
+      }
       ul.messages {
         display: none !important;
       }
@@ -33,12 +35,12 @@
           {% endfor %}
 
           <div class="mb-3 mt-4">
-            <label for="username" class="form-label" style="color: white">EMAIL <span class="text-danger">*</span></label>
+            <label for="username" class="form-label" style="">EMAIL <span class="text-danger">*</span></label>
             <input type="text" name="email" placeholder="Enter username" id="username" style="height: 40px; background-color: transparent;" class="form-control py-3" aria-describedby="usernameHelp" />
           </div>
 
           <div class="mb-3">
-            <label for="username" class="form-label" style="color: white">PASSWORD <span class="text-danger">*</span></label>
+            <label for="username" class="form-label" style="">PASSWORD <span class="text-danger">*</span></label>
             <input type="password" name="password" placeholder="Enter password" id="password" class="form-control py-3" style="height: 40px; background-color: transparent;" />
           </div>
 
@@ -48,7 +50,7 @@
           </button>
 
           <div class="d-flex">
-            <p style="color: white" class="pr-2">Haven't signed up?</p>
+            <p style="color: var(--text-color);" class="pr-2">Haven't signed up?</p>
             <a href="{% url 'register' %}">Sign Up</a>
           </div>
         </form>
@@ -102,14 +104,6 @@
               {% endfor %}
             {% endfor %}
 
-            {% comment %}
-            <div class="d-flex flex-column mt-5">
-              <label for="id_name">LAST NAME <span class="text-danger">*</span></label>
-              <input type="text" name="name" maxlength="150" autocapitalize="none" autocomplete="name" autofocus="" required class="form-control" aria-describedby="id_name_helptext" id="id_name" placeholder="Your Name" />
-              <span class="helptext" id="id_name_helptext" style="font-size: 0.8em; font-style: italic;">Will appear together with username.</span>
-            </div>
-            {% endcomment %}
-
             <div class="d-flex flex-column mt-3">
               <label for="id_username">USERNAME <span class="text-danger">*</span></label>
               <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required class="form-control" aria-describedby="id_username_helptext" id="id_username" placeholder="Unique Username" />
@@ -136,7 +130,7 @@
 
             <button type="submit" value="Register" class="btn btn-primary mt-5 mb-3 w-100"><i class="fas fa-lock"></i> Register</button>
             <div class="d-flex">
-              <p style="color: white" class="pr-2">Already have an account?</p>
+              <p style="color: var(--text-color)" class="pr-2">Already have an account?</p>
               <a href="{% url 'login' %}">Log in</a>
             </div>
           </form>

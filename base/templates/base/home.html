@@ -28,7 +28,7 @@
   </style>
 
   <div class="home-container container pt-4">
-    {% comment %}Topics Section{% endcomment %}
+    {% comment %}Tags Section{% endcomment %}
     <div class="topic-column">
       <div style="" class="d-flex flex-column">
         <div class="d-flex my-2" style="width: 100%;">
@@ -66,14 +66,14 @@
       </div>
     </div>
 
-    {% comment %}Rooms Section{% endcomment %}
+    {% comment %}Notebooks Section{% endcomment %}
     <div class="rooms-column">
       <div class="d-flex mb-1" style="justify-content: space-between; align-items: center">
-        <h3>Rooms</h3>
+        <h3>Notebooks</h3>
 
-        <a href="{% url 'create-room' %}"><button class="btn btn-primary">Create Room</button></a>
+        <a href="{% url 'create-room' %}"><button class="btn btn-primary">Create <i class="fa fa-book" aria-hidden="true"></i> </button></a>
       </div>
-      <p class="mb-4">{{ room_count }} rooms available</p>
+      <p class="mb-4"><i>{{ room_count }} notebooks available</i></p>
 
       {% include 'base/feed_component.html' %}
     </div>

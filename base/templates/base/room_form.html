@@ -16,7 +16,7 @@
         <h3>New Topic</h3>
         {% csrf_token %} {% comment %} Form topic section {% endcomment %}
         <div class="form__group d-flex flex-column pb-2">
-            <label for="room_topic">Room Topic</label>
+            <label for="room_topic">Notebook Tag</label>
             <input
                 class="form-control"
                 type="text"
@@ -43,7 +43,7 @@
 
         {% comment %} Form Name section {% endcomment %}
         <div class="form-field d-flex flex-column pb-2">
-            {{form.name.label_tag}}
+            <label for="room_topic">Notebook Title</label>
 
             <input
                 type="text"
@@ -61,7 +61,8 @@
 
         {% comment %} Form description section {% endcomment %}
         <div class="form-field d-flex flex-column pb-2">
-            {{form.description.label_tag}}
+            <label for="room_topic">Notebook Details</label>
+
             <textarea
                 name="description"
                 id=""
