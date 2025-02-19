@@ -1,246 +1,147 @@
-{% extends 'main.html' %} {% block content %} {% if page == 'login' %}
-
-<style>
-    .login-form {
-        width: 100% !important;
-        margin: 0px !important;
-        height: 100% !important;
-    }
-    .signup-form {
-        width: 100% !important;
-        margin: 0px !important;
-        height: 100% !important;
-    }
-
-    @media screen and (min-width: 768px) {
-        .login-form {
-            width: 50% !important;
-            margin-top: 20px !important;
-            height: 450px !important;
-        }
-
-        .signup-form {
-            width: 50% !important;
-            margin-top: 20px !important;
-            height: 450px !important;
-        }
-
-        .containing-box {
-        }
-    }
-</style>
-
-<div
-    class="d-flex flex-column containing-box"
-    style="align-items: center; height: 90vh"
->
-    <div
-        class="login-form container py-5 d-flex justify-center items-center flex-column"
-        style="align-items: center; background-color: var(--bg-color)"
-    >
-        <form action="" class="" style="width: 80%" method="POST">
-            {% csrf_token %}
-
-            <h3 style="color: #28c7a5">Welcome Back</h3>
-            <h5 style="color: #aaa">Good to see you again</h5>
-
-            <div class="mb-3 mt-4">
-                <label for="username" class="form-label" style="color: white"
-                    >EMAIL <span class="text-danger">*</span></label
-                >
-                <input
-                    type="text"
-                    name="email"
-                    placeholder="Enter username"
-                    id="username"
-                    style="height: 40px; background-color: transparent;"
-                    class="form-control py-3"
-                    aria-describedby="usernameHelp"
-                />
-            </div>
-
-            <div class="mb-3">
-                <label for="username" class="form-label" style="color: white"
-                    >PASSWORD <span class="text-danger">*</span>
-                </label>
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Enter password"
-                    id="password"
-                    class="form-control py-3"
-                    style="height: 40px; background-color: transparent;"
-                />
-            </div>
-
-            <button type="submit" class="btn btn-primary my-3 w-100">
-                Login
-            </button>
-
-            <div class="d-flex">
-                <p style="color: white" class="pr-2">Haven't signed up?</p>
-                <a href="{% url 'register' %}">Sign Up</a>
-            </div>
-        </form>
-    </div>
-
-    {% else %}
-
+{% extends 'main.html' %} {% block content %}
+  {% if page == 'login' %}
     <style>
-        .signup-form {
-            width: 100% !important;
-            margin: 0px !important;
-            height: 100% !important;
-            width: 100%;
+      .login-form {
+        width: 100% !important;
+        margin: 0px !important;
+        height: 100% !important;
+      }
+      
+      ul.messages {
+        display: none !important;
+      }
+      @media screen and (min-width: 768px) {
+        .login-form {
+          width: 50% !important;
+          margin-top: 20px !important;
+          height: 450px !important;
         }
-
-        .signup-form input {
-            background: transparent;
-        }
-
-        @media screen and (min-width: 768px) {
-            .signup-form {
-                margin-top: 20px !important;
-                height: 450px !important;
-                width: 60%;
-            }
-
-            .containing-box {
-            }
-        }
+      }
     </style>
 
-    <div
-        class="signup-form container py-5 bg-dark d-flex justify-center items-center flex-column mt-5"
-        style="
+    <div class="d-flex flex-column containing-box" style="align-items: center; height: 90vh">
+      <div class="login-form container py-5 d-flex justify-center items-center flex-column" style="align-items: center; background-color: var(--bg-color)">
+        <form action="" class="" style="width: 80%" method="POST">
+          {% csrf_token %}
+
+          <h3 style="color: #28c7a5">Welcome Back</h3>
+          <h5 style="color: #aaa">Good to see you again</h5>
+          {% for message in messages %}
+            <div class="alert alert-danger" style="width: 100%;">
+              <p style="font-size: small;font-style: italic;" class="p-0 m-0">{{ message }}</p>
+            </div>
+          {% endfor %}
+
+          <div class="mb-3 mt-4">
+            <label for="username" class="form-label" style="color: white">EMAIL <span class="text-danger">*</span></label>
+            <input type="text" name="email" placeholder="Enter username" id="username" style="height: 40px; background-color: transparent;" class="form-control py-3" aria-describedby="usernameHelp" />
+          </div>
+
+          <div class="mb-3">
+            <label for="username" class="form-label" style="color: white">PASSWORD <span class="text-danger">*</span></label>
+            <input type="password" name="password" placeholder="Enter password" id="password" class="form-control py-3" style="height: 40px; background-color: transparent;" />
+          </div>
+
+          <button type="submit" class="btn btn-primary my-3 w-100">
+            <i class="fas fa-lock"></i>
+            Login
+          </button>
+
+          <div class="d-flex">
+            <p style="color: white" class="pr-2">Haven't signed up?</p>
+            <a href="{% url 'register' %}">Sign Up</a>
+          </div>
+        </form>
+      </div>
+
+      {% else %}
+
+      <style>
+        .signup-form {
+          width: 100% !important;
+          margin: 0px !important;
+          height: 100% !important;
+          width: 100%;
+        }
+        
+        ul.messages {
+          display: none !important;
+        }
+        
+        .signup-form input {
+          background: transparent;
+        }
+        
+        @media screen and (min-width: 768px) {
+          .signup-form {
+            margin-top: 20px !important;
+            height: 450px !important;
+            width: 60%;
+          }
+        
+          .signup-inner-form {
+            width: 50% !important;
+          }
+        }
+      </style>
+
+      <div class="signup-form container py-5 bg-dark d-flex justify-center items-center flex-column mt-5" style="
             align-items: center;
             background-color: var(--bg-color) !important;
-        "
-    >
-        <div class="">
-            <form action="" style="width: 100%" method="POST">
-                {% csrf_token %}
+        ">
+        <div class="signup-inner-form" style="">
+          <form action="" style="width: 100%" method="POST">
+            {% csrf_token %}
 
-                <h3 style="color: #28c7a5">Good To Have You Here</h3>
-                <h5 style="color: #aaa" class="">
-                    Please fill in all three inputs!
-                </h5>
+            <h3 style="color: #28c7a5">Good To Have You Here</h3>
+            <h5 style="color: #aaa" class="">Please fill in all three inputs!</h5>
 
-                <div class="d-flex flex-column mt-5">
-                    <label for="id_name">LAST NAME <span class="text-danger">*</span></label>
-                    <input
-                        type="text"
-                        name="name"
-                        maxlength="150"
-                        autocapitalize="none"
-                        autocomplete="name"
-                        autofocus=""
-                        required
-                        class="form-control"
-                        aria-describedby="id_name_helptext"
-                        id="id_name"
-                        placeholder="Your Name"
-                    />
-                    <span class="helptext" id="id_name_helptext" style="font-size: 0.8em; font-style: italic;"
-                        >Will appear together with username.</span
-                    >
-                </div>
+            {% for field in form %}
+              {% for error in field.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+              {% endfor %}
+            {% endfor %}
 
-                <div class="d-flex flex-column mt-3">
-                    <label for="id_username">USERNAME <span class="text-danger">*</span></label>
-                    <input
-                        type="text"
-                        name="username"
-                        maxlength="150"
-                        autocapitalize="none"
-                        autocomplete="username"
-                        autofocus=""
-                        required
-                        class="form-control"
-                        aria-describedby="id_username_helptext"
-                        id="id_username"
-                        placeholder="Unique Username"
-                    />
-                    <span class="helptext" id="id_username_helptext" style="font-size: 0.8em; font-style: italic;"
-                        >Required Letters, digits and @ or . or + or - or _
-                        only.</span
-                    >
-                </div>
+            {% comment %}
+            <div class="d-flex flex-column mt-5">
+              <label for="id_name">LAST NAME <span class="text-danger">*</span></label>
+              <input type="text" name="name" maxlength="150" autocapitalize="none" autocomplete="name" autofocus="" required class="form-control" aria-describedby="id_name_helptext" id="id_name" placeholder="Your Name" />
+              <span class="helptext" id="id_name_helptext" style="font-size: 0.8em; font-style: italic;">Will appear together with username.</span>
+            </div>
+            {% endcomment %}
 
-                <div class="d-flex flex-column mt-3">
-                    <label for="id_username">EMAIL <span class="text-danger">*</span></label>
-                    <input
-                        type="email"
-                        name="email"
-                        maxlength="150"
-                        autocapitalize="none"
-                        autocomplete="email"
-                        autofocus=""
-                        required
-                        class="form-control"
-                        aria-describedby="id_email_helptext"
-                        id="id_email"
-                        placeholder="Unique Email"
-                    />
-                    <span class="helptext" id="id_email_helptext" style="font-size: 0.8em; font-style: italic;"
-                        >Should be unique</span
-                    >
-                </div>
+            <div class="d-flex flex-column mt-3">
+              <label for="id_username">USERNAME <span class="text-danger">*</span></label>
+              <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required class="form-control" aria-describedby="id_username_helptext" id="id_username" placeholder="Unique Username" />
+              <span class="helptext" id="id_username_helptext" style="font-size: 0.8em; font-style: italic;">Required Letters, digits and @ or . or + or - or _ only.</span>
+            </div>
 
-                <div class="d-flex flex-column mt-3">
-                    <label for="id_password1">PASSWORD <span class="text-danger">*</span></label>
-                    <input
-                        type="password"
-                        name="password1"
-                        autocomplete="new-password"
-                        required
-                        class="form-control"
-                        aria-describedby="id_password1_helptext"
-                        id="id_password1"
-                        placeholder="New Password"
-                    />
-                    <span class="helptext" id="id_password1_helptext" style="font-size: 0.8em; font-style: italic;">
-                        Password should be a mix of numbers, letters and simbols
-                    </span>
-                </div>
+            <div class="d-flex flex-column mt-3">
+              <label for="id_username">EMAIL <span class="text-danger">*</span></label>
+              <input type="email" name="email" maxlength="150" autocapitalize="none" autocomplete="email" autofocus="" required class="form-control" aria-describedby="id_email_helptext" id="id_email" placeholder="Unique Email" />
+              <span class="helptext" id="id_email_helptext" style="font-size: 0.8em; font-style: italic;">Should be unique</span>
+            </div>
 
-                <div class="d-flex flex-column mt-3">
-                    <label for="id_password2">PASSWORD CONFIRM <span class="text-danger">*</span></label>
-                    <input
-                        type="password"
-                        name="password2"
-                        autocomplete="new-password"
-                        required
-                        class="form-control"
-                        aria-describedby="id_password2_helptext"
-                        id="id_password2"
-                        placeholder="Repeat New Password"
-                    />
-                    <span class="helptext" id="id_password2_helptext" style="font-size: 0.8em; font-style: italic;"
-                        >Enter the same password as before, for
-                        verification.</span
-                    >
-                </div>
+            <div class="d-flex flex-column mt-3">
+              <label for="id_password1">PASSWORD <span class="text-danger">*</span></label>
+              <input type="password" name="password1" autocomplete="new-password" required class="form-control" aria-describedby="id_password1_helptext" id="id_password1" placeholder="New Password" />
+              <span class="helptext" id="id_password1_helptext" style="font-size: 0.8em; font-style: italic;">Password should be a mix of numbers, letters and simbols</span>
+            </div>
 
-                <button
-                    type="submit"
-                    value="Register"
-                    class="btn btn-primary mt-5 mb-3 w-100"
-                >
-                   <i class="fas fa-lock"></i></i> Register
-                </button>
-                <div class="d-flex">
-                    <p style="color: white" class="pr-2">
-                        Already have an account?
-                    </p>
-                    <a href="{% url 'login' %}">Log in</a>
-                </div>
-            </form>
+            <div class="d-flex flex-column mt-3">
+              <label for="id_password2">PASSWORD CONFIRM <span class="text-danger">*</span></label>
+              <input type="password" name="password2" autocomplete="new-password" required class="form-control" aria-describedby="id_password2_helptext" id="id_password2" placeholder="Repeat New Password" />
+              <span class="helptext" id="id_password2_helptext" style="font-size: 0.8em; font-style: italic;">Enter the same password as before, for verification.</span>
+            </div>
+
+            <button type="submit" value="Register" class="btn btn-primary mt-5 mb-3 w-100"><i class="fas fa-lock"></i> Register</button>
+            <div class="d-flex">
+              <p style="color: white" class="pr-2">Already have an account?</p>
+              <a href="{% url 'login' %}">Log in</a>
+            </div>
+          </form>
         </div>
-
-        <div class="messages">
-            <li></li>
-        </div>
+      </div>
     </div>
-</div>
-{% endif %} {% endblock %}
+  {% endif %}
+{% endblock %}

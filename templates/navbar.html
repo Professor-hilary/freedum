@@ -128,18 +128,7 @@
                         ">Search</button>
           </div>
         </form>
-        {% comment %} <div class="settings-toggle">
-          <div class="p-3 d-flex" style="justify-content: center; align-items: center">
-            <a href="{% url 'update-user' %}" class=""><i class="fa fa-cog p-0" style="font-size: 20px" aria-hidden="true"></i></a>
-          </div>
-          <div class="p-3 d-flex" style="justify-content: center; align-items: center">
-            {% if request.user.is_authenticated %}
-              <a href="{% url 'logout' %}" class="text-danger" style="font-size: larger;"><i class="fas fa-sign-out-alt"></i></a>
-            {% else %}
-              <a href="{% url 'login' %}" class="text-danger" style="font-size: larger;"><i class="fas fa-sign-in-alt"></i></a>
-            {% endif %}
-          </div>
-        </div> {% endcomment %}
+        
 
         <div class="d-flex my-2 nav-profile" style="
                     flex-direction: row;

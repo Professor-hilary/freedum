@@ -48,12 +48,22 @@ def registerPage(request):
         form = NewUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.username = user.username.lower()
+            user.username = user.username.lower()            
             user.save()
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, "Error occured during registration")
+            # Extract data safely
+            username = form.cleaned_data.get('username', '')
+            email = form.cleaned_data.get('email', '')
+
+            if User.objects.filter(username=username).exists():
+                messages.error(request, "Username already exists")
+            elif User.objects.filter(email=email).exists():
+                messages.error(request, "Email already exists")
+            else:
+                messages.error(request, "Error occurred during registration")
+
 
     return render(request, 'base/login_register.html', {'form': form})
 
