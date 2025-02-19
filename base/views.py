@@ -48,7 +48,8 @@ def registerPage(request):
         form = NewUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.username = user.username.lower()            
+            user.username = user.username.lower()
+            user.name = user.email.split("@")[0]
             user.save()
             login(request, user)
             return redirect('home')

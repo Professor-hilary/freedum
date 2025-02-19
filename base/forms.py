@@ -9,7 +9,7 @@ class NewUserCreationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['name', 'username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2']
 
     def clean_username(self):
         username = self.cleaned_data.get("username").lower()
