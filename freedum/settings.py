@@ -2,7 +2,9 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 from urllib.parse import urlparse
-
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 load_dotenv()  # Load local .env file
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
@@ -85,7 +87,14 @@ DATABASES = {
         'PORT': 5432,
     }
 }
+cloudinary.config( 
+  cloud_name = "ds0wbfx4j",  # Replace with your Cloudinary cloud name
+  api_key = "677261198934116",        # Replace with your API key
+  api_secret = "9eHMnHpbCMq-gW5zoFpcdsweKN4"   # Replace with your API secret
+)
 
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
