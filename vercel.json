@@ -7,23 +7,12 @@
                 "maxLambdaSize": "15mb",
                 "runtime": "python3.12"
             }
-        },
-        {
-          "src": "build_files.sh",
-          "use": "@vercel/static-build",
-          "config": {
-            "distDir": "staticfiles"
-          }
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
             "dest": "freedum/wsgi.py"
-        },
-        {
-            "src": "/static/(.*)",
-            "dest": "/static/$1"
         }
     ]
 }
