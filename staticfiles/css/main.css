@@ -1,0 +1,80 @@
+/* Hide scrollbar Firefox */
+html {
+    scroll-behavior: smooth;scrollbar-width: none !important;
+}
+
+body {
+    background-color: white !important;
+}
+
+/* Hide scrollbar Chrome, Safari, Edge */
+::-webkit-scrollbar {
+    display: none !important;
+}
+
+.nav-profile{
+    display: flex !important;
+}
+
+.search-bar {
+    display: none !important;
+}
+
+#toggle-label {
+    display: none !important;
+}
+
+.home-container {
+    display: grid;
+    grid-template-columns: 3fr;
+    gap: 20px; /* Optional spacing between columns */
+}
+
+.home-container .topic-column,
+.home-container .activities-column {
+    display: none !important;
+}
+
+.settings-toggle{
+    display: none !important;
+}
+
+.page-item.active .page-link{
+    color: var(--text-color) !important;
+}
+
+/* Media Queries */
+@media screen and (min-width: 768px) {
+    .search-bar {
+        display: flex !important;
+    }
+
+    #toggle-label {
+        display: inline-block !important;
+    }
+
+    .settings-toggle{
+        display: flex;
+    }
+
+    .home-container {
+        display: grid;
+        grid-template-columns: 1fr 3fr !important;
+    }
+
+    .topic-col-title{
+        font-size: 1.2em;
+    }
+
+    .home-container .topic-column,
+    .home-container .activities-column {
+        display: flex !important;
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 1024px) {    
+    .nav-profile{
+        display: flex !important;
+    }
+}
