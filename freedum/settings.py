@@ -144,8 +144,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-    os.path.join(BASE_DIR, 'static'),  # Ensure this path exists
+    BASE_DIR / 'static',  # This should already work, make sure `static` exists in your base directory
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # For `collectstatic`
