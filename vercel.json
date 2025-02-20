@@ -1,33 +1,33 @@
 {
-  "builds": [
-    {
-      "src": "freedum/wsgi.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "15mb",
-        "runtime": "python3.12"
-      }
-    },
-    {
-      "src": "staticfiles/**/*",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "build.sh",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "staticfiles"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "freedum/wsgi.py"
-    },
-    {
-      "src": "/static/(.*)",
-      "dest": "/staticfiles/$1"
-    }
-  ]
+    "builds": [
+        {
+            "src": "freedum/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.12"
+            }
+        },
+        {
+            "src": "staticfiles/**/*",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "build.sh",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "staticfiles"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "freedum/wsgi.py"
+        },
+        {
+            "src": "/static/(.*)",
+            "dest": "/staticfiles/$1"
+        }
+    ]
 }
