@@ -13,7 +13,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+from dotenv import load_dotenv
+from urllib.parse import urlparse
 
+load_dotenv()  # Load local .env file
+tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -88,11 +92,18 @@ WSGI_APPLICATION = 'freedum.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    """ 'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    } """
-    "default" : dj_database_url.config(default=os.getenv("DATABASE_URL"))
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': tmpPostgres.path.replace('/', ''),
+        'USER': tmpPostgres.username,
+        'PASSWORD': tmpPostgres.password,
+        'HOST': tmpPostgres.hostname,
+        'PORT': 5432,
+    }
 }
 
 
