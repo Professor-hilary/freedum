@@ -93,7 +93,6 @@ cloudinary.config(
   api_secret = "9eHMnHpbCMq-gW5zoFpcdsweKN4"   # Replace with your API secret
 )
 
-
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Password validation
