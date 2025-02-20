@@ -37,7 +37,7 @@ AUTH_USER_MODEL = 'base.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this middleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this middleware
     'corsheaders.middleware.CorsMiddleware', 
     
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -121,7 +121,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 STATIC_URL = 'static/'
 MEDIA_URL = '/images/'
