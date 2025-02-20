@@ -1,136 +1,139 @@
-<!DOCTYPE html lang="en-GB">
+<!DOCTYPE html>
 
 {% load static %}
 
-<html style="scrollbar-width: none">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>freedum</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!-- Bootstrap CSS (Offline) -->
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
-        <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}" />
-        <link
-            rel="stylesheet"
-            href="{% static 'css/main.css' %}"
-            media="screen"
-        />
+<html style="scrollbar-width: none" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>freedum</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS (Offline) -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
 
-        <style>
-            :root {
-                --bg-color: #ffffff;
-                --text-color: #000000;
-                --toggle-bg: #ddd;
-                --toggle-circle: #fff;
-                --card-color: #fff;
-                --card-border-color: #ddd;
-                --nav-bar: #f9f9f9;
-                --search-color: #fff;
-                --search-border: #aaa;
-                --feed-description: #444;
-                --comment-box: #fff;
-                --comment-box-text: #444;
-                --tag-color: #ffd7b5;
-            }
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" media="screen" />
 
-            .dark-mode {
-                --bg-color: #051024;
-                --text-color: #ffffff;
-                --toggle-bg: #061831;
-                --toggle-circle: #33466c;
-                --card-color: #061831;
-                --card-border-color: #33466c;
-                --nav-bar: #0b1c3e;
-                --search-color: #11244a;
-                --search-border: #33466c;
-                --feed-description: #aaa;
-                --comment-box: #10254a;
-                --comment-box-text: #fff;
-                --tag-color: #33466c;
-            }
-
-            body {
-                background-color: var(--bg-color);
-                color: var(--text-color);
-                transition: background-color 0.3s, color 0.3s;
-            }
-
-            .toggle-container {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                font-size: 16px;
-                font-weight: bold;
-                cursor: pointer;
-            }
-
-            .toggle-switch {
-                width: 50px;
-                height: 25px;
-                background-color: var(--toggle-bg);
-                border-radius: 50px;
-                position: relative;
-                transition: background-color 0.3s;
-            }
-
-            .toggle-circle {
-                width: 20px;
-                height: 20px;
-                background-color: var(--toggle-circle);
-                border-radius: 50%;
-                position: absolute;
-                top: 50%;
-                left: 4px;
-                transform: translateY(-50%);
-                transition: left 0.3s, background-color 0.3s;
-            }
-
-            .dark-mode .toggle-circle {
-                left: 26px;
-            }
-        </style>
-    </head>
-
-    <body class="pt-0" style="background-color: var(--bg-color) !important">
-        {% include "navbar.html" %} {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li>{{message}}</li>
-            {% endfor %}
-        </ul>
-        {% endif %} {% block content %} {% endblock %}
-    </body>
-
-    <!-- Bootstrap JS (Offline) -->
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const toggleSwitch = document.querySelector('.toggle-switch')
-        const body = document.body
-        const toggleLabel = document.getElementById('toggle-label')
+    <style>
+      :root {
+        --bg-color: #ffffff;
+        --text-color: #000000;
+        --toggle-bg: #ddd;
+        --toggle-circle: #fff;
+        --card-color: #fff;
+        --card-border-color: #ddd;
+        --nav-bar: #f9f9f9;
+        --search-color: #fff;
+        --search-border: #aaa;
+        --feed-description: #444;
+        --comment-box: #fff;
+        --comment-box-text: #444;
+        --tag-color: #ffd7b5;
+      }
       
-        // Check saved theme and apply
-        if (localStorage.getItem('theme') === 'dark') {
+      .dark-mode {
+        --bg-color: #051024;
+        --text-color: #ffffff;
+        --toggle-bg: #061831;
+        --toggle-circle: #33466c;
+        --card-color: #061831;
+        --card-border-color: #33466c;
+        --nav-bar: #0b1c3e;
+        --search-color: #11244a;
+        --search-border: #33466c;
+        --feed-description: #aaa;
+        --comment-box: #10254a;
+        --comment-box-text: #fff;
+        --tag-color: #33466c;
+      }
+      
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: background-color 0.3s, color 0.3s;
+      }
+      
+      .toggle-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      
+      .toggle-switch {
+        width: 50px;
+        height: 25px;
+        background-color: var(--toggle-bg);
+        border-radius: 50px;
+        position: relative;
+        transition: background-color 0.3s;
+      }
+      
+      .toggle-circle {
+        width: 20px;
+        height: 20px;
+        background-color: var(--toggle-circle);
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 4px;
+        transform: translateY(-50%);
+        transition: left 0.3s, background-color 0.3s;
+      }
+      
+      .dark-mode .toggle-circle {
+        left: 26px;
+      }
+    </style>
+  </head>
+
+  <body class="pt-0" style="background-color: var(--bg-color) !important">
+    {% include 'navbar.html' %} {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %} {% block content %}
+
+    {% endblock %}
+  </body>
+
+  <!-- Bootstrap JS (Offline) -->
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggleSwitch = document.querySelector('.toggle-switch')
+      const body = document.body
+      const toggleLabel = document.getElementById('toggle-label')
+    
+      // Check saved theme and apply
+      if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode')
+        toggleLabel.textContent = 'Light'
+      }
+    
+      toggleSwitch.addEventListener('click', () => {
+        if (body.classList.contains('dark-mode')) {
+          body.classList.remove('dark-mode')
+          localStorage.setItem('theme', 'light')
+          toggleLabel.textContent = 'Dark'
+        } else {
           body.classList.add('dark-mode')
+          localStorage.setItem('theme', 'dark')
           toggleLabel.textContent = 'Light'
         }
-      
-        toggleSwitch.addEventListener('click', () => {
-          if (body.classList.contains('dark-mode')) {
-            body.classList.remove('dark-mode')
-            localStorage.setItem('theme', 'light')
-            toggleLabel.textContent = 'Dark'
-          } else {
-            body.classList.add('dark-mode')
-            localStorage.setItem('theme', 'dark')
-            toggleLabel.textContent = 'Light'
-          }
-        })
-      
       })
-    </script>
-      
-    </html>
+    })
+  </script>
+</html>
